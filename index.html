@@ -38,11 +38,13 @@
                         'glow': '0 15px 40px -10px rgba(100, 116, 139, 0.3)',
                         'soft': '0 10px 40px -10px rgba(30, 41, 59, 0.05)',
                         'dark': '0 20px 40px -10px rgba(0, 0, 0, 0.3)',
+                        'modern': '0 20px 50px -12px rgba(100, 116, 139, 0.15)',
                     },
                     animation: {
                         'float': 'float 8s ease-in-out infinite',
                         'kenburns': 'kenburns 25s ease-out both',
                         'slow-pan': 'slowPan 30s alternate infinite linear',
+                        'blob': 'blob 10s infinite',
                     },
                     keyframes: {
                         float: {
@@ -56,6 +58,12 @@
                         slowPan: {
                             '0%': { objectPosition: 'center top' },
                             '100%': { objectPosition: 'center bottom' },
+                        },
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
                         }
                     }
                 }
@@ -83,17 +91,7 @@
             background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(0, 0, 0, 0.05);
-        }
-        
-        .service-card {
-            background: #ffffff;
-            border: 1px solid rgba(0, 0, 0, 0.03);
-            transition: all 0.5s ease;
-        }
-        .service-card:hover {
-            box-shadow: 0 15px 50px -10px rgba(30, 41, 59, 0.08);
-            transform: translateY(-5px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
         }
 
         #lightbox {
@@ -104,11 +102,11 @@
         #lightbox img { transform: scale(0.95); transition: transform 0.4s ease; }
         #lightbox.active img { transform: scale(1); }
 
-        /* Solid FAQ Tabs */
-        .faq-content { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0, 1, 0, 1); }
-        .faq-item.active .faq-content { max-height: 600px; transition: max-height 0.5s ease-in-out; }
-        .faq-icon { transition: transform 0.4s ease; }
-        .faq-item.active .faq-icon { transform: rotate(180deg); }
+        /* Absolute Solid FAQ Styles */
+        .faq-item { transition: all 0.3s ease; }
+        .faq-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; }
+        .faq-icon-wrapper { transition: transform 0.4s ease; }
+        .faq-item.active .faq-icon-wrapper { transform: rotate(45deg); } /* Turns + into x */
 
         .mask-portrait {
             mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
@@ -154,7 +152,7 @@
 
     <!-- Hero Section -->
     <section class="relative min-h-screen flex items-center pt-28 pb-12 overflow-hidden bg-lux-base">
-        <!-- Background Image (Made more visible) -->
+        <!-- Background Image -->
         <div class="absolute inset-0 z-0 bg-lux-base">
             <div class="w-full h-full bg-cover bg-center bg-fixed animate-kenburns opacity-[0.65]" style="background-image: url('https://raw.githubusercontent.com/agelmet/PAPADOPOULOS/refs/heads/main/n17.jpg');"></div>
         </div>
@@ -242,8 +240,12 @@
         </div>
     </section>
 
-    <!-- Services Section -->
-    <section id="services" class="py-32 px-6 bg-lux-base relative">
+    <!-- Services Section (Redesigned with WOW modern effects) -->
+    <section id="services" class="py-32 px-6 bg-lux-base relative overflow-hidden">
+        <!-- Decorative abstract blobs -->
+        <div class="absolute top-20 right-0 w-[40vw] h-[40vw] bg-slate-200/40 rounded-full mix-blend-multiply blur-[80px] animate-blob"></div>
+        <div class="absolute bottom-0 left-0 w-[50vw] h-[50vw] bg-lux-accent/10 rounded-full mix-blend-multiply blur-[100px] animate-blob" style="animation-delay: 2s;"></div>
+
         <div class="max-w-[90rem] mx-auto relative z-10">
             <div class="text-center mb-20 reveal">
                 <span class="text-lux-accent font-bold tracking-ultra text-xs uppercase">ΕΞΕΙΔΙΚΕΥΣΗ & ΥΠΟΣΤΗΡΙΞΗ</span>
@@ -251,65 +253,92 @@
                 <div class="w-12 h-px bg-lux-accent mx-auto"></div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
                 
                 <!-- Service 1 -->
-                <div class="service-card p-10 lg:p-14 rounded-3xl group reveal">
-                    <div class="w-16 h-16 rounded-2xl bg-lux-base flex items-center justify-center mb-8 border border-gray-100 group-hover:bg-lux-dark transition-colors duration-500">
-                        <i data-lucide="user" class="w-8 h-8 text-lux-accent group-hover:text-white transition-colors duration-500"></i>
-                    </div>
-                    <h3 class="text-2xl font-serif text-lux-text mb-4">Ατομική Σωματική Ψυχοθεραπεία & Διαχείριση Τραύματος</h3>
-                    <p class="text-lux-muted font-light leading-relaxed mb-8">
-                        Η ατομική συμβουλευτική δεν περιορίζεται μόνο στη λεκτική επικοινωνία. Αξιοποιώντας τη Σωματική Ψυχοθεραπεία και το σωματικό-σχεσιακό μοντέλο τραυματοθεραπείας, δουλεύουμε σε βάθος με τα μπλοκαρίσματα, το άγχος και τα τραύματα που έχουν «εγκλωβιστεί» στο σώμα.
-                    </p>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="px-4 py-1.5 bg-lux-base text-lux-accent text-[10px] font-bold tracking-ultra rounded-full border border-gray-100">ΕΝΗΛΙΚΕΣ</span>
-                        <span class="px-4 py-1.5 bg-lux-base text-lux-accent text-[10px] font-bold tracking-ultra rounded-full border border-gray-100">ΑΠΕΛΕΥΘΕΡΩΣΗ ΕΝΤΑΣΗΣ</span>
+                <div class="relative group reveal h-full">
+                    <!-- Modern glow behind card -->
+                    <div class="absolute -inset-1 bg-gradient-to-r from-lux-accent/20 to-slate-300/30 rounded-[2.5rem] blur-xl opacity-0 group-hover:opacity-100 transition duration-700"></div>
+                    <!-- Actual Card -->
+                    <div class="relative h-full bg-white/80 backdrop-blur-xl border border-white p-10 lg:p-14 rounded-3xl shadow-soft group-hover:shadow-modern transition-all duration-500 transform group-hover:-translate-y-2 flex flex-col">
+                        <!-- Floating 3D Icon Container -->
+                        <div class="relative w-20 h-20 mb-10 shrink-0">
+                            <div class="absolute inset-0 bg-gradient-to-br from-lux-accent to-slate-300 rounded-[1.25rem] rotate-6 group-hover:rotate-12 transition-transform duration-500 opacity-20 group-hover:opacity-40"></div>
+                            <div class="absolute inset-0 bg-white rounded-2xl flex items-center justify-center -rotate-3 group-hover:rotate-0 transition-transform duration-500 shadow-glass border border-gray-100">
+                                <i data-lucide="activity" class="w-8 h-8 text-lux-accent"></i>
+                            </div>
+                        </div>
+                        <h3 class="text-2xl font-serif text-lux-text mb-4">Ατομική Σωματική Ψυχοθεραπεία & Διαχείριση Τραύματος</h3>
+                        <p class="text-lux-muted font-light leading-relaxed mb-8 flex-grow">
+                            Η ατομική συμβουλευτική δεν περιορίζεται μόνο στη λεκτική επικοινωνία. Αξιοποιώντας τη Σωματική Ψυχοθεραπεία και το σωματικό-σχεσιακό μοντέλο τραυματοθεραπείας, δουλεύουμε σε βάθος με τα μπλοκαρίσματα και τα τραύματα.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mt-auto">
+                            <span class="px-4 py-1.5 bg-gray-50 text-lux-accent text-[10px] font-bold tracking-ultra rounded-full border border-gray-100">ΕΝΗΛΙΚΕΣ</span>
+                            <span class="px-4 py-1.5 bg-gray-50 text-lux-accent text-[10px] font-bold tracking-ultra rounded-full border border-gray-100">ΤΡΑΥΜΑΤΟΘΕΡΑΠΕΙΑ</span>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Service 2 -->
-                <div class="service-card p-10 lg:p-14 rounded-3xl group reveal reveal-delay-1">
-                    <div class="w-16 h-16 rounded-2xl bg-lux-base flex items-center justify-center mb-8 border border-gray-100 group-hover:bg-lux-dark transition-colors duration-500">
-                        <i data-lucide="leaf" class="w-8 h-8 text-lux-accent group-hover:text-white transition-colors duration-500"></i>
-                    </div>
-                    <h3 class="text-2xl font-serif text-lux-text mb-4">Συμβουλευτική Εφήβων (15+) & Ομάδες Πρόληψης</h3>
-                    <p class="text-lux-muted font-light leading-relaxed mb-8">
-                        Η εφηβεία είναι μια περίοδος τεράστιων σωματικών και συναισθηματικών αλλαγών. Παρέχεται εξειδικευμένη υποστήριξη μέσα από ατομικές συνεδρίες ή ομάδες, προσφέροντας έναν χώρο χωρίς κριτική για την εξερεύνηση της ταυτότητας και το χτίσιμο υγιών ορίων.
-                    </p>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="px-4 py-1.5 bg-lux-base text-lux-accent text-[10px] font-bold tracking-ultra rounded-full border border-gray-100">ΕΦΗΒΟΙ 15+</span>
-                        <span class="px-4 py-1.5 bg-lux-base text-lux-accent text-[10px] font-bold tracking-ultra rounded-full border border-gray-100">ΟΡΙΑ & ΕΝΔΥΝΑΜΩΣΗ</span>
+                <div class="relative group reveal reveal-delay-1 h-full">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-slate-300/30 to-lux-accent/20 rounded-[2.5rem] blur-xl opacity-0 group-hover:opacity-100 transition duration-700"></div>
+                    <div class="relative h-full bg-white/80 backdrop-blur-xl border border-white p-10 lg:p-14 rounded-3xl shadow-soft group-hover:shadow-modern transition-all duration-500 transform group-hover:-translate-y-2 flex flex-col">
+                        <div class="relative w-20 h-20 mb-10 shrink-0">
+                            <div class="absolute inset-0 bg-gradient-to-br from-lux-accent to-slate-300 rounded-[1.25rem] -rotate-6 group-hover:-rotate-12 transition-transform duration-500 opacity-20 group-hover:opacity-40"></div>
+                            <div class="absolute inset-0 bg-white rounded-2xl flex items-center justify-center rotate-3 group-hover:rotate-0 transition-transform duration-500 shadow-glass border border-gray-100">
+                                <i data-lucide="sparkles" class="w-8 h-8 text-lux-accent"></i>
+                            </div>
+                        </div>
+                        <h3 class="text-2xl font-serif text-lux-text mb-4">Συμβουλευτική Εφήβων (15+) & Ομάδες Πρόληψης</h3>
+                        <p class="text-lux-muted font-light leading-relaxed mb-8 flex-grow">
+                            Η εφηβεία είναι μια περίοδος τεράστιων σωματικών και συναισθηματικών αλλαγών. Παρέχεται εξειδικευμένη υποστήριξη σε εφήβους (άνω των 15) για εξερεύνηση ταυτότητας και χτίσιμο ορίων, σε ένα χώρο χωρίς κριτική.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mt-auto">
+                            <span class="px-4 py-1.5 bg-gray-50 text-lux-accent text-[10px] font-bold tracking-ultra rounded-full border border-gray-100">ΕΦΗΒΟΙ 15+</span>
+                            <span class="px-4 py-1.5 bg-gray-50 text-lux-accent text-[10px] font-bold tracking-ultra rounded-full border border-gray-100">ΠΡΟΛΗΨΗ</span>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Service 3 -->
-                <div class="service-card p-10 lg:p-14 rounded-3xl group reveal">
-                    <div class="w-16 h-16 rounded-2xl bg-lux-base flex items-center justify-center mb-8 border border-gray-100 group-hover:bg-lux-dark transition-colors duration-500">
-                        <i data-lucide="users" class="w-8 h-8 text-lux-accent group-hover:text-white transition-colors duration-500"></i>
-                    </div>
-                    <h3 class="text-2xl font-serif text-lux-text mb-4">Ομαδική Ψυχοθεραπεία & Ενδυνάμωση</h3>
-                    <p class="text-lux-muted font-light leading-relaxed mb-8">
-                        Η ομάδα λειτουργεί ως ένας μικρόκοσμος της κοινωνίας. Με εφόδια τη συνθετική μέθοδο (Gestalt, Ψυχόδραμα), ο σύμβουλος καθοδηγεί ομάδες ενηλίκων, όπου τα μέλη μοιράζονται βιώματα και χτίζουν αυθεντικές σχέσεις.
-                    </p>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="px-4 py-1.5 bg-lux-base text-lux-accent text-[10px] font-bold tracking-ultra rounded-full border border-gray-100">ΟΜΑΔΕΣ ΕΝΗΛΙΚΩΝ</span>
-                        <span class="px-4 py-1.5 bg-lux-base text-lux-accent text-[10px] font-bold tracking-ultra rounded-full border border-gray-100">GESTALT & ΨΥΧΟΔΡΑΜΑ</span>
+                <div class="relative group reveal h-full">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-lux-accent/20 to-slate-300/30 rounded-[2.5rem] blur-xl opacity-0 group-hover:opacity-100 transition duration-700"></div>
+                    <div class="relative h-full bg-white/80 backdrop-blur-xl border border-white p-10 lg:p-14 rounded-3xl shadow-soft group-hover:shadow-modern transition-all duration-500 transform group-hover:-translate-y-2 flex flex-col">
+                        <div class="relative w-20 h-20 mb-10 shrink-0">
+                            <div class="absolute inset-0 bg-gradient-to-br from-lux-accent to-slate-300 rounded-[1.25rem] rotate-6 group-hover:rotate-12 transition-transform duration-500 opacity-20 group-hover:opacity-40"></div>
+                            <div class="absolute inset-0 bg-white rounded-2xl flex items-center justify-center -rotate-3 group-hover:rotate-0 transition-transform duration-500 shadow-glass border border-gray-100">
+                                <i data-lucide="network" class="w-8 h-8 text-lux-accent"></i>
+                            </div>
+                        </div>
+                        <h3 class="text-2xl font-serif text-lux-text mb-4">Ομαδική Ψυχοθεραπεία & Ενδυνάμωση</h3>
+                        <p class="text-lux-muted font-light leading-relaxed mb-8 flex-grow">
+                            Η ομάδα λειτουργεί ως ένας μικρόκοσμος της κοινωνίας. Με εφόδια τη συνθετική μέθοδο (Gestalt, Ψυχόδραμα), ο σύμβουλος καθοδηγεί ομάδες ενηλίκων, όπου τα μέλη μοιράζονται βιώματα και χτίζουν αυθεντικές σχέσεις.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mt-auto">
+                            <span class="px-4 py-1.5 bg-gray-50 text-lux-accent text-[10px] font-bold tracking-ultra rounded-full border border-gray-100">ΟΜΑΔΕΣ ΕΝΗΛΙΚΩΝ</span>
+                            <span class="px-4 py-1.5 bg-gray-50 text-lux-accent text-[10px] font-bold tracking-ultra rounded-full border border-gray-100">GESTALT</span>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Service 4 -->
-                <div class="service-card p-10 lg:p-14 rounded-3xl group reveal reveal-delay-1">
-                    <div class="w-16 h-16 rounded-2xl bg-lux-base flex items-center justify-center mb-8 border border-gray-100 group-hover:bg-lux-dark transition-colors duration-500">
-                        <i data-lucide="laptop" class="w-8 h-8 text-lux-accent group-hover:text-white transition-colors duration-500"></i>
-                    </div>
-                    <h3 class="text-2xl font-serif text-lux-text mb-4">Ευέλικτες Συνεδρίες (Δια Ζώσης & Online)</h3>
-                    <p class="text-lux-muted font-light leading-relaxed mb-8">
-                        Προσαρμοζόμενο στις σύγχρονες ανάγκες και τον προσωπικό ρυθμό κάθε ατόμου, το γραφείο λειτουργεί από Δευτέρα έως Παρασκευή (κατόπιν ραντεβού). Οι συνεδρίες πραγματοποιούνται είτε δια ζώσης στη Νέα Σμύρνη, είτε διαδικτυακά.
-                    </p>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="px-4 py-1.5 bg-lux-base text-lux-accent text-[10px] font-bold tracking-ultra rounded-full border border-gray-100">ΝΕΑ ΣΜΥΡΝΗ</span>
-                        <span class="px-4 py-1.5 bg-lux-base text-lux-accent text-[10px] font-bold tracking-ultra rounded-full border border-gray-100">ΕΞ' ΑΠΟΣΤΑΣΕΩΣ</span>
+                <div class="relative group reveal reveal-delay-1 h-full">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-slate-300/30 to-lux-accent/20 rounded-[2.5rem] blur-xl opacity-0 group-hover:opacity-100 transition duration-700"></div>
+                    <div class="relative h-full bg-white/80 backdrop-blur-xl border border-white p-10 lg:p-14 rounded-3xl shadow-soft group-hover:shadow-modern transition-all duration-500 transform group-hover:-translate-y-2 flex flex-col">
+                        <div class="relative w-20 h-20 mb-10 shrink-0">
+                            <div class="absolute inset-0 bg-gradient-to-br from-lux-accent to-slate-300 rounded-[1.25rem] -rotate-6 group-hover:-rotate-12 transition-transform duration-500 opacity-20 group-hover:opacity-40"></div>
+                            <div class="absolute inset-0 bg-white rounded-2xl flex items-center justify-center rotate-3 group-hover:rotate-0 transition-transform duration-500 shadow-glass border border-gray-100">
+                                <i data-lucide="monitor-smartphone" class="w-8 h-8 text-lux-accent"></i>
+                            </div>
+                        </div>
+                        <h3 class="text-2xl font-serif text-lux-text mb-4">Ευέλικτες Συνεδρίες (Δια Ζώσης & Online)</h3>
+                        <p class="text-lux-muted font-light leading-relaxed mb-8 flex-grow">
+                            Προσαρμοζόμενο στις σύγχρονες ανάγκες και τον προσωπικό ρυθμό κάθε ατόμου, το γραφείο λειτουργεί από Δευτέρα έως Παρασκευή (κατόπιν ραντεβού). Οι συνεδρίες πραγματοποιούνται δια ζώσης στη Νέα Σμύρνη ή διαδικτυακά.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mt-auto">
+                            <span class="px-4 py-1.5 bg-gray-50 text-lux-accent text-[10px] font-bold tracking-ultra rounded-full border border-gray-100">ΝΕΑ ΣΜΥΡΝΗ</span>
+                            <span class="px-4 py-1.5 bg-gray-50 text-lux-accent text-[10px] font-bold tracking-ultra rounded-full border border-gray-100">ONLINE</span>
+                        </div>
                     </div>
                 </div>
 
@@ -319,7 +348,6 @@
 
     <!-- Philosophy / Body Armor Section (Dark Contrast Theme) -->
     <section id="philosophy" class="py-32 px-6 bg-lux-dark text-white relative border-y border-white/5">
-        <!-- Abstract dark background elements -->
         <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-lux-accent/5 rounded-full blur-[100px] pointer-events-none"></div>
         <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-white/5 rounded-full blur-[100px] pointer-events-none"></div>
 
@@ -364,11 +392,9 @@
             </div>
 
             <div class="relative">
-                <!-- Vertical Line -->
                 <div class="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-lux-accent/30 to-transparent transform -translate-x-1/2"></div>
 
                 <div class="space-y-16">
-                    
                     <!-- Step 1 -->
                     <div class="flex flex-col md:flex-row items-center justify-between w-full reveal group">
                         <div class="md:w-[45%] md:text-right pr-0 md:pr-12 mb-6 md:mb-0 text-center md:text-right bg-white p-6 rounded-2xl shadow-sm border border-gray-50 md:bg-transparent md:p-0 md:border-none md:shadow-none">
@@ -412,7 +438,6 @@
                         <div class="relative z-10 flex items-center justify-center w-6 h-6 rounded-full bg-white border-4 border-lux-accent shadow-[0_0_15px_rgba(100,116,139,0.2)] group-hover:scale-125 transition-transform duration-500"></div>
                         <div class="md:w-[45%] hidden md:block"></div>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -480,7 +505,7 @@
         </div>
     </section>
 
-    <!-- FAQ Section -->
+    <!-- FAQ Section (Solid Redesign) -->
     <section class="py-32 px-6 bg-lux-base border-t border-gray-100">
         <div class="max-w-[50rem] mx-auto">
             <div class="text-center mb-16 reveal">
@@ -488,43 +513,52 @@
                 <p class="text-lux-muted">Λύνοντας βασικές απορίες για τη διαδικασία της θεραπείας.</p>
             </div>
 
-            <!-- Solid Structure for FAQ Tabs: Titles remain firmly visible -->
+            <!-- Absolute Robust FAQ Structure -->
             <div class="space-y-4">
                 
                 <!-- FAQ Item 1 -->
-                <div class="faq-item bg-white border border-gray-200 rounded-2xl overflow-hidden reveal shadow-sm">
-                    <button class="w-full p-6 flex justify-between items-center bg-white hover:bg-gray-50 transition-colors text-left" onclick="this.parentElement.classList.toggle('active')">
-                        <h4 class="font-serif text-xl text-lux-text font-medium pr-4">Τι είναι ακριβώς η Σωματική Ψυχοθεραπεία;</h4>
-                        <i data-lucide="chevron-down" class="w-5 h-5 text-lux-accent faq-icon shrink-0"></i>
+                <div class="faq-item bg-white border border-gray-200 rounded-2xl shadow-sm hover:shadow-md reveal">
+                    <button class="w-full px-6 py-5 flex justify-between items-center text-left focus:outline-none group" onclick="toggleFaq(this)">
+                        <h4 class="font-serif text-xl text-lux-text font-medium pr-4 group-hover:text-lux-accent transition-colors">Τι είναι ακριβώς η Σωματική Ψυχοθεραπεία;</h4>
+                        <div class="w-8 h-8 rounded-full bg-lux-base flex items-center justify-center shrink-0 border border-gray-100 faq-icon-wrapper">
+                            <i data-lucide="plus" class="w-4 h-4 text-lux-accent"></i>
+                        </div>
                     </button>
-                    <div class="faq-content bg-white">
-                        <div class="p-6 text-lux-muted font-light text-sm leading-relaxed border-t border-gray-100">
+                    <!-- Content Wrapper -->
+                    <div class="faq-content">
+                        <div class="px-6 pb-6 text-lux-muted font-light text-sm md:text-base leading-relaxed border-t border-gray-50 pt-4">
                             Είναι μια προσέγγιση που συνδυάζει την παραδοσιακή λεκτική ψυχοθεραπεία με την παρατήρηση και έκφραση του σώματος. Θεωρεί ότι οι εμπειρίες και τα συναισθήματά μας αποθηκεύονται στους μύες (ως ένταση) και μέσα από ειδικές τεχνικές, βοηθά στην απελευθέρωσή τους.
                         </div>
                     </div>
                 </div>
 
                 <!-- FAQ Item 2 -->
-                <div class="faq-item bg-white border border-gray-200 rounded-2xl overflow-hidden reveal reveal-delay-1 shadow-sm">
-                    <button class="w-full p-6 flex justify-between items-center bg-white hover:bg-gray-50 transition-colors text-left" onclick="this.parentElement.classList.toggle('active')">
-                        <h4 class="font-serif text-xl text-lux-text font-medium pr-4">Σε ποιες ηλικίες απευθύνεστε;</h4>
-                        <i data-lucide="chevron-down" class="w-5 h-5 text-lux-accent faq-icon shrink-0"></i>
+                <div class="faq-item bg-white border border-gray-200 rounded-2xl shadow-sm hover:shadow-md reveal reveal-delay-1">
+                    <button class="w-full px-6 py-5 flex justify-between items-center text-left focus:outline-none group" onclick="toggleFaq(this)">
+                        <h4 class="font-serif text-xl text-lux-text font-medium pr-4 group-hover:text-lux-accent transition-colors">Σε ποιες ηλικίες απευθύνεστε;</h4>
+                        <div class="w-8 h-8 rounded-full bg-lux-base flex items-center justify-center shrink-0 border border-gray-100 faq-icon-wrapper">
+                            <i data-lucide="plus" class="w-4 h-4 text-lux-accent"></i>
+                        </div>
                     </button>
-                    <div class="faq-content bg-white">
-                        <div class="p-6 text-lux-muted font-light text-sm leading-relaxed border-t border-gray-100">
+                    <!-- Content Wrapper -->
+                    <div class="faq-content">
+                        <div class="px-6 pb-6 text-lux-muted font-light text-sm md:text-base leading-relaxed border-t border-gray-50 pt-4">
                             Οι υπηρεσίες του γραφείου απευθύνονται σε ενήλικες (μέσα από ατομική ή ομαδική θεραπεία) καθώς και σε εφήβους ηλικίας 15 ετών και άνω, μέσα από ατομική συμβουλευτική ή ομάδες πρόληψης και ενδυνάμωσης.
                         </div>
                     </div>
                 </div>
 
                 <!-- FAQ Item 3 -->
-                <div class="faq-item bg-white border border-gray-200 rounded-2xl overflow-hidden reveal shadow-sm">
-                    <button class="w-full p-6 flex justify-between items-center bg-white hover:bg-gray-50 transition-colors text-left" onclick="this.parentElement.classList.toggle('active')">
-                        <h4 class="font-serif text-xl text-lux-text font-medium pr-4">Μπορώ να κάνω συνεδρίες διαδικτυακά (online);</h4>
-                        <i data-lucide="chevron-down" class="w-5 h-5 text-lux-accent faq-icon shrink-0"></i>
+                <div class="faq-item bg-white border border-gray-200 rounded-2xl shadow-sm hover:shadow-md reveal">
+                    <button class="w-full px-6 py-5 flex justify-between items-center text-left focus:outline-none group" onclick="toggleFaq(this)">
+                        <h4 class="font-serif text-xl text-lux-text font-medium pr-4 group-hover:text-lux-accent transition-colors">Μπορώ να κάνω συνεδρίες διαδικτυακά (online);</h4>
+                        <div class="w-8 h-8 rounded-full bg-lux-base flex items-center justify-center shrink-0 border border-gray-100 faq-icon-wrapper">
+                            <i data-lucide="plus" class="w-4 h-4 text-lux-accent"></i>
+                        </div>
                     </button>
-                    <div class="faq-content bg-white">
-                        <div class="p-6 text-lux-muted font-light text-sm leading-relaxed border-t border-gray-100">
+                    <!-- Content Wrapper -->
+                    <div class="faq-content">
+                        <div class="px-6 pb-6 text-lux-muted font-light text-sm md:text-base leading-relaxed border-t border-gray-50 pt-4">
                             Ναι, οι συνεδρίες μπορούν να πραγματοποιηθούν και εξ' αποστάσεως (διαδικτυακά) μέσω βιντεοκλήσης, διατηρώντας απόλυτα την ποιότητα, τη σταθερότητα και την εμπιστευτικότητα της θεραπευτικής διαδικασίας.
                         </div>
                     </div>
@@ -536,7 +570,6 @@
 
     <!-- Footer / Contact (Deep Dark Serious Theme) -->
     <footer id="contact" class="bg-lux-darker border-t border-white/5 pt-32 pb-12 relative overflow-hidden">
-        <!-- Abstract gradient to match philosophy section -->
         <div class="absolute inset-0 bg-gradient-to-t from-[#020617] to-[#0f172a] z-0"></div>
         
         <div class="max-w-[90rem] mx-auto px-6 relative z-10">
@@ -631,7 +664,7 @@
             }
         });
 
-        // 4. Scroll Reveal (Intersection Observer)
+        // 4. Scroll Reveal
         const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
         const observer = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
@@ -644,7 +677,23 @@
 
         document.querySelectorAll('.reveal').forEach(el => { observer.observe(el); });
 
-        // 5. Lightbox Functionality
+        // 5. Robust FAQ Toggle Function
+        function toggleFaq(button) {
+            const faqItem = button.parentElement;
+            const content = faqItem.querySelector('.faq-content');
+            
+            // Toggle active class for icon rotation and state
+            faqItem.classList.toggle('active');
+            
+            // Explicitly set max-height for smooth reliable animation
+            if (faqItem.classList.contains('active')) {
+                content.style.maxHeight = content.scrollHeight + "px";
+            } else {
+                content.style.maxHeight = "0px";
+            }
+        }
+
+        // 6. Lightbox Functionality
         const lightbox = document.getElementById('lightbox');
         const lightboxImg = document.getElementById('lightbox-img');
 
