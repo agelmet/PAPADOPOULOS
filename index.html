@@ -102,11 +102,9 @@
         #lightbox img { transform: scale(0.95); transition: transform 0.4s ease; }
         #lightbox.active img { transform: scale(1); }
 
-        /* Absolute Solid FAQ Styles */
-        .faq-item { transition: all 0.3s ease; }
-        .faq-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; }
-        .faq-icon-wrapper { transition: transform 0.4s ease; }
-        .faq-item.active .faq-icon-wrapper { transform: rotate(45deg); } /* Turns + into x */
+        /* Standard Dropdown FAQ Styles */
+        .faq-icon-wrapper { transition: transform 0.3s ease; }
+        .faq-item.active .faq-icon-wrapper { transform: rotate(180deg); } 
 
         .mask-portrait {
             mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
@@ -348,6 +346,7 @@
 
     <!-- Philosophy / Body Armor Section (Dark Contrast Theme) -->
     <section id="philosophy" class="py-32 px-6 bg-lux-dark text-white relative border-y border-white/5">
+        <!-- Abstract dark background elements -->
         <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-lux-accent/5 rounded-full blur-[100px] pointer-events-none"></div>
         <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-white/5 rounded-full blur-[100px] pointer-events-none"></div>
 
@@ -451,7 +450,6 @@
                 <p class="text-lux-muted max-w-2xl mx-auto font-light">Ένα φωτεινό περιβάλλον απόλυτης ιδιωτικότητας και ηρεμίας στη Νέα Σμύρνη, σχεδιασμένο για να προσφέρει την απαραίτητη ασφάλεια κατά τη θεραπευτική διαδικασία.</p>
             </div>
 
-            <!-- Symmetrical Masonry Layout (Uncropped Images) -->
             <div class="columns-1 md:columns-2 lg:columns-4 gap-4 space-y-4">
                 <button class="w-full break-inside-avoid overflow-hidden group relative reveal cursor-zoom-in rounded-xl border border-gray-100" onclick="openLightbox('https://raw.githubusercontent.com/agelmet/PAPADOPOULOS/refs/heads/main/n11.jpg')">
                     <img src="https://raw.githubusercontent.com/agelmet/PAPADOPOULOS/refs/heads/main/n11.jpg" alt="Χώρος Γραφείου" class="w-full h-auto transform group-hover:scale-105 transition-transform duration-700">
@@ -505,7 +503,7 @@
         </div>
     </section>
 
-    <!-- FAQ Section (Solid Redesign) -->
+    <!-- FAQ Section (Standard Dropdown Implementation) -->
     <section class="py-32 px-6 bg-lux-base border-t border-gray-100">
         <div class="max-w-[50rem] mx-auto">
             <div class="text-center mb-16 reveal">
@@ -513,19 +511,19 @@
                 <p class="text-lux-muted">Λύνοντας βασικές απορίες για τη διαδικασία της θεραπείας.</p>
             </div>
 
-            <!-- Absolute Robust FAQ Structure -->
+            <!-- Solid Regular Dropdowns -->
             <div class="space-y-4">
                 
                 <!-- FAQ Item 1 -->
-                <div class="faq-item bg-white border border-gray-200 rounded-2xl shadow-sm hover:shadow-md reveal">
-                    <button class="w-full px-6 py-5 flex justify-between items-center text-left focus:outline-none group" onclick="toggleFaq(this)">
+                <div class="faq-item bg-white border border-gray-200 rounded-2xl shadow-sm hover:shadow-md reveal transition-all duration-300">
+                    <button class="w-full px-6 py-5 flex justify-between items-center text-left focus:outline-none group rounded-2xl" onclick="toggleFaq(this)">
                         <h4 class="font-serif text-xl text-lux-text font-medium pr-4 group-hover:text-lux-accent transition-colors">Τι είναι ακριβώς η Σωματική Ψυχοθεραπεία;</h4>
                         <div class="w-8 h-8 rounded-full bg-lux-base flex items-center justify-center shrink-0 border border-gray-100 faq-icon-wrapper">
-                            <i data-lucide="plus" class="w-4 h-4 text-lux-accent"></i>
+                            <i data-lucide="chevron-down" class="w-5 h-5 text-lux-accent"></i>
                         </div>
                     </button>
-                    <!-- Content Wrapper -->
-                    <div class="faq-content">
+                    <!-- Content -->
+                    <div class="faq-content hidden">
                         <div class="px-6 pb-6 text-lux-muted font-light text-sm md:text-base leading-relaxed border-t border-gray-50 pt-4">
                             Είναι μια προσέγγιση που συνδυάζει την παραδοσιακή λεκτική ψυχοθεραπεία με την παρατήρηση και έκφραση του σώματος. Θεωρεί ότι οι εμπειρίες και τα συναισθήματά μας αποθηκεύονται στους μύες (ως ένταση) και μέσα από ειδικές τεχνικές, βοηθά στην απελευθέρωσή τους.
                         </div>
@@ -533,15 +531,15 @@
                 </div>
 
                 <!-- FAQ Item 2 -->
-                <div class="faq-item bg-white border border-gray-200 rounded-2xl shadow-sm hover:shadow-md reveal reveal-delay-1">
-                    <button class="w-full px-6 py-5 flex justify-between items-center text-left focus:outline-none group" onclick="toggleFaq(this)">
+                <div class="faq-item bg-white border border-gray-200 rounded-2xl shadow-sm hover:shadow-md reveal reveal-delay-1 transition-all duration-300">
+                    <button class="w-full px-6 py-5 flex justify-between items-center text-left focus:outline-none group rounded-2xl" onclick="toggleFaq(this)">
                         <h4 class="font-serif text-xl text-lux-text font-medium pr-4 group-hover:text-lux-accent transition-colors">Σε ποιες ηλικίες απευθύνεστε;</h4>
                         <div class="w-8 h-8 rounded-full bg-lux-base flex items-center justify-center shrink-0 border border-gray-100 faq-icon-wrapper">
-                            <i data-lucide="plus" class="w-4 h-4 text-lux-accent"></i>
+                            <i data-lucide="chevron-down" class="w-5 h-5 text-lux-accent"></i>
                         </div>
                     </button>
-                    <!-- Content Wrapper -->
-                    <div class="faq-content">
+                    <!-- Content -->
+                    <div class="faq-content hidden">
                         <div class="px-6 pb-6 text-lux-muted font-light text-sm md:text-base leading-relaxed border-t border-gray-50 pt-4">
                             Οι υπηρεσίες του γραφείου απευθύνονται σε ενήλικες (μέσα από ατομική ή ομαδική θεραπεία) καθώς και σε εφήβους ηλικίας 15 ετών και άνω, μέσα από ατομική συμβουλευτική ή ομάδες πρόληψης και ενδυνάμωσης.
                         </div>
@@ -549,15 +547,15 @@
                 </div>
 
                 <!-- FAQ Item 3 -->
-                <div class="faq-item bg-white border border-gray-200 rounded-2xl shadow-sm hover:shadow-md reveal">
-                    <button class="w-full px-6 py-5 flex justify-between items-center text-left focus:outline-none group" onclick="toggleFaq(this)">
+                <div class="faq-item bg-white border border-gray-200 rounded-2xl shadow-sm hover:shadow-md reveal transition-all duration-300">
+                    <button class="w-full px-6 py-5 flex justify-between items-center text-left focus:outline-none group rounded-2xl" onclick="toggleFaq(this)">
                         <h4 class="font-serif text-xl text-lux-text font-medium pr-4 group-hover:text-lux-accent transition-colors">Μπορώ να κάνω συνεδρίες διαδικτυακά (online);</h4>
                         <div class="w-8 h-8 rounded-full bg-lux-base flex items-center justify-center shrink-0 border border-gray-100 faq-icon-wrapper">
-                            <i data-lucide="plus" class="w-4 h-4 text-lux-accent"></i>
+                            <i data-lucide="chevron-down" class="w-5 h-5 text-lux-accent"></i>
                         </div>
                     </button>
-                    <!-- Content Wrapper -->
-                    <div class="faq-content">
+                    <!-- Content -->
+                    <div class="faq-content hidden">
                         <div class="px-6 pb-6 text-lux-muted font-light text-sm md:text-base leading-relaxed border-t border-gray-50 pt-4">
                             Ναι, οι συνεδρίες μπορούν να πραγματοποιηθούν και εξ' αποστάσεως (διαδικτυακά) μέσω βιντεοκλήσης, διατηρώντας απόλυτα την ποιότητα, τη σταθερότητα και την εμπιστευτικότητα της θεραπευτικής διαδικασίας.
                         </div>
@@ -677,20 +675,16 @@
 
         document.querySelectorAll('.reveal').forEach(el => { observer.observe(el); });
 
-        // 5. Robust FAQ Toggle Function
+        // 5. Standard FAQ Toggle Function (Instant display)
         function toggleFaq(button) {
             const faqItem = button.parentElement;
             const content = faqItem.querySelector('.faq-content');
             
-            // Toggle active class for icon rotation and state
+            // Toggle active class for icon rotation
             faqItem.classList.toggle('active');
             
-            // Explicitly set max-height for smooth reliable animation
-            if (faqItem.classList.contains('active')) {
-                content.style.maxHeight = content.scrollHeight + "px";
-            } else {
-                content.style.maxHeight = "0px";
-            }
+            // Toggle Tailwind's 'hidden' class to instantly show/hide the content
+            content.classList.toggle('hidden');
         }
 
         // 6. Lightbox Functionality
