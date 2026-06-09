@@ -20,11 +20,11 @@
                 extend: {
                     colors: {
                         lux: {
-                            base: '#0f141e',       // Deep midnight slate
-                            surface: '#181f2c',    // Slightly lighter slate
-                            accent: '#8b8c89',     // Cool taupe / silver
-                            light: '#e2e2e0',      // Off-white/sand
-                            muted: '#475569'       // Muted slate
+                            base: '#f8fafc',       // Very light, clean slate (background)
+                            surface: '#ffffff',    // Pure white (cards/sections)
+                            accent: '#64748b',     // Serious slate blue/gray
+                            text: '#1e293b',       // Very dark slate (almost black) for text
+                            muted: '#475569'       // Medium slate for paragraphs
                         }
                     },
                     fontFamily: {
@@ -32,8 +32,9 @@
                         serif: ['Cormorant Garamond', 'serif'],
                     },
                     boxShadow: {
-                        'glass': '0 8px 32px 0 rgba(15, 20, 30, 0.3)',
-                        'glow': '0 0 40px -10px rgba(139, 140, 137, 0.15)',
+                        'glass': '0 8px 32px 0 rgba(30, 41, 59, 0.05)',
+                        'glow': '0 15px 40px -10px rgba(100, 116, 139, 0.3)',
+                        'soft': '0 10px 40px -10px rgba(30, 41, 59, 0.05)',
                     },
                     animation: {
                         'float': 'float 8s ease-in-out infinite',
@@ -43,7 +44,7 @@
                     keyframes: {
                         float: {
                             '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-15px)' },
+                            '50%': { transform: 'translateY(-10px)' },
                         },
                         kenburns: {
                             '0%': { transform: 'scale(1.1)' },
@@ -60,55 +61,46 @@
     </script>
 
     <style>
-        /* Modern Scrollbar */
+        /* Modern Scrollbar for Light Theme */
         ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #0f141e; }
-        ::-webkit-scrollbar-thumb { background: #475569; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #8b8c89; }
+        ::-webkit-scrollbar-track { background: #f8fafc; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
 
-        body { background-color: #0f141e; color: #e2e2e0; }
+        body { background-color: #f8fafc; color: #1e293b; }
 
         /* Typography tweaks */
         .tracking-ultra { letter-spacing: 0.2em; }
         .no-accents { text-transform: uppercase; }
 
         /* Reveal Animations */
-        .reveal { opacity: 0; transform: translateY(50px); transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); }
-        .reveal-delay-1 { transition-delay: 0.2s; }
-        .reveal-delay-2 { transition-delay: 0.4s; }
+        .reveal-delay-1 { transition-delay: 0.15s; }
+        .reveal-delay-2 { transition-delay: 0.3s; }
 
-        /* Glassmorphism Panels */
-        .glass-dark {
-            background: rgba(15, 20, 30, 0.65);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+        /* Light Glassmorphism */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(0, 0, 0, 0.05);
         }
         
-        .glass-light {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.4s ease;
+        .service-card {
+            background: #ffffff;
+            border: 1px solid rgba(0, 0, 0, 0.03);
+            transition: all 0.5s ease;
         }
-        .glass-light:hover {
-            background: rgba(255, 255, 255, 0.06);
-            border-color: rgba(255, 255, 255, 0.15);
-        }
-
-        /* Gradient Text */
-        .text-gradient {
-            background: linear-gradient(to right, #e2e2e0, #8b8c89);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .service-card:hover {
+            box-shadow: 0 15px 50px -10px rgba(30, 41, 59, 0.08);
+            transform: translateY(-5px);
         }
 
         /* Lightbox */
         #lightbox {
             opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
-            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
         }
         #lightbox.active { opacity: 1; pointer-events: auto; }
         #lightbox img { transform: scale(0.95); transition: transform 0.4s ease; }
@@ -122,83 +114,97 @@
 
         /* Custom image mask for portrait */
         .mask-portrait {
-            mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
-            -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+            mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
         }
     </style>
 </head>
-<body class="font-sans antialiased overflow-x-hidden selection:bg-lux-accent selection:text-lux-base">
+<body class="font-sans antialiased overflow-x-hidden selection:bg-lux-accent selection:text-white">
 
+    <!-- Navigation -->
     <nav class="fixed w-full z-50 transition-all duration-500" id="navbar">
         <div class="max-w-[90rem] mx-auto px-6 py-4 transition-all duration-500" id="nav-container">
-            <div class="glass-dark rounded-full flex justify-between items-center px-8 py-4 shadow-glass border-b border-white/5">
+            <div class="glass-panel rounded-full flex justify-between items-center px-8 py-3 shadow-glass">
                 
                 <a href="#" class="flex flex-col group">
-                    <span class="font-serif text-xl md:text-2xl font-semibold tracking-wide text-white group-hover:text-lux-accent transition-colors">Ευάγγελος Παπαδόπουλος</span>
-                    <span class="text-[10px] md:text-xs tracking-ultra text-lux-accent uppercase mt-1">Σωματικη Ψυχοθεραπεια & Συμβουλευτικη</span>
+                    <span class="font-serif text-xl md:text-2xl font-semibold tracking-wide text-lux-text group-hover:text-lux-accent transition-colors">Ευάγγελος Παπαδόπουλος</span>
+                    <span class="text-[10px] md:text-xs tracking-ultra text-lux-muted uppercase mt-0.5">Σωματικη Ψυχοθεραπεια & Συμβουλευτικη</span>
                 </a>
                 
                 <div class="hidden lg:flex items-center space-x-10">
-                    <a href="#about" class="text-sm font-medium text-lux-light hover:text-white transition-colors">ΣΧΕΤΙΚΑ</a>
-                    <a href="#services" class="text-sm font-medium text-lux-light hover:text-white transition-colors">ΥΠΗΡΕΣΙΕΣ</a>
-                    <a href="#philosophy" class="text-sm font-medium text-lux-light hover:text-white transition-colors">ΠΡΟΣΕΓΓΙΣΗ</a>
-                    <a href="#space" class="text-sm font-medium text-lux-light hover:text-white transition-colors">Ο ΧΩΡΟΣ</a>
-                    <a href="#contact" class="px-8 py-3 bg-white text-lux-base rounded-full text-sm font-bold hover:bg-lux-accent hover:text-white transition-all transform hover:scale-105 shadow-[0_0_20px_rgba(255,255,255,0.1)]">ΚΛΕΙΣΤΕ ΡΑΝΤΕΒΟΥ</a>
+                    <a href="#about" class="text-sm font-medium text-lux-muted hover:text-lux-accent transition-colors">ΣΧΕΤΙΚΑ</a>
+                    <a href="#services" class="text-sm font-medium text-lux-muted hover:text-lux-accent transition-colors">ΥΠΗΡΕΣΙΕΣ</a>
+                    <a href="#philosophy" class="text-sm font-medium text-lux-muted hover:text-lux-accent transition-colors">ΠΡΟΣΕΓΓΙΣΗ</a>
+                    <a href="#space" class="text-sm font-medium text-lux-muted hover:text-lux-accent transition-colors">Ο ΧΩΡΟΣ</a>
+                    <a href="#contact" class="px-8 py-3 bg-lux-text text-white rounded-full text-sm font-bold hover:bg-lux-accent hover:shadow-glow transition-all transform hover:-translate-y-0.5">ΚΛΕΙΣΤΕ ΡΑΝΤΕΒΟΥ</a>
                 </div>
 
-                <button class="lg:hidden text-white focus:outline-none" id="mobile-menu-btn">
+                <button class="lg:hidden text-lux-text focus:outline-none" id="mobile-menu-btn">
                     <i data-lucide="menu" class="w-6 h-6"></i>
                 </button>
             </div>
         </div>
         
-        <div id="mobile-menu" class="absolute top-full left-0 w-full glass-dark hidden flex-col items-center py-8 space-y-6 border-t border-white/10 shadow-2xl">
-            <a href="#about" class="text-sm font-medium tracking-ultra text-white mobile-link">ΣΧΕΤΙΚΑ</a>
-            <a href="#services" class="text-sm font-medium tracking-ultra text-white mobile-link">ΥΠΗΡΕΣΙΕΣ</a>
-            <a href="#philosophy" class="text-sm font-medium tracking-ultra text-white mobile-link">ΠΡΟΣΕΓΓΙΣΗ</a>
-            <a href="#space" class="text-sm font-medium tracking-ultra text-white mobile-link">Ο ΧΩΡΟΣ</a>
-            <a href="#contact" class="px-8 py-3 mt-4 bg-white text-lux-base rounded-full text-sm font-bold mobile-link">ΚΛΕΙΣΤΕ ΡΑΝΤΕΒΟΥ</a>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="absolute top-full left-0 w-full glass-panel hidden flex-col items-center py-8 space-y-6 shadow-xl border-t border-gray-100">
+            <a href="#about" class="text-sm font-medium tracking-ultra text-lux-text mobile-link">ΣΧΕΤΙΚΑ</a>
+            <a href="#services" class="text-sm font-medium tracking-ultra text-lux-text mobile-link">ΥΠΗΡΕΣΙΕΣ</a>
+            <a href="#philosophy" class="text-sm font-medium tracking-ultra text-lux-text mobile-link">ΠΡΟΣΕΓΓΙΣΗ</a>
+            <a href="#space" class="text-sm font-medium tracking-ultra text-lux-text mobile-link">Ο ΧΩΡΟΣ</a>
+            <a href="#contact" class="px-8 py-3 mt-4 bg-lux-text text-white rounded-full text-sm font-bold mobile-link">ΚΛΕΙΣΤΕ ΡΑΝΤΕΒΟΥ</a>
         </div>
     </nav>
 
-    <section class="relative min-h-screen flex items-center pt-24 pb-12 overflow-hidden bg-lux-base">
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center pt-28 pb-12 overflow-hidden bg-lux-base">
+        <!-- Background Image -->
         <div class="absolute inset-0 z-0">
-            <div class="w-full h-full bg-cover bg-center bg-fixed animate-kenburns opacity-60" style="background-image: url('https://raw.githubusercontent.com/agelmet/PAPADOPOULOS/refs/heads/main/n17.jpg');"></div>
+            <div class="w-full h-full bg-cover bg-center bg-fixed animate-kenburns opacity-40 mix-blend-multiply" style="background-image: url('https://raw.githubusercontent.com/agelmet/PAPADOPOULOS/refs/heads/main/n17.jpg');"></div>
         </div>
         
-        <div class="absolute inset-0 bg-gradient-to-r from-lux-base/90 via-lux-base/50 to-lux-base/95 z-10"></div>
-        <div class="absolute inset-0 bg-gradient-to-t from-lux-base via-transparent to-transparent z-10"></div>
+        <!-- Smart Light Gradients for readibility -->
+        <div class="absolute inset-0 bg-gradient-to-r from-white/95 via-white/80 to-white/10 z-10 hidden lg:block"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-white/95 via-white/80 to-white/30 z-10 lg:hidden"></div>
 
         <div class="max-w-[90rem] mx-auto w-full px-6 grid lg:grid-cols-2 gap-12 items-center relative z-20">
             
+            <!-- Left Side: Portrait Image (Desktop Only here) -->
             <div class="hidden lg:flex justify-center items-center reveal relative">
-                <div class="relative w-[400px] h-[550px] rounded-3xl overflow-hidden glass-dark p-2 shadow-2xl animate-float border border-white/10">
-                    <div class="absolute inset-0 bg-gradient-to-tr from-lux-base/40 to-transparent z-10 rounded-3xl"></div>
-                    <img src="https://raw.githubusercontent.com/agelmet/PAPADOPOULOS/refs/heads/main/2%20(2).jpg" alt="Ευάγγελος Παπαδόπουλος" class="w-full h-full object-cover rounded-[1.25rem] filter contrast-125 grayscale-[20%]">
+                <div class="relative w-[400px] h-[550px] rounded-3xl overflow-hidden glass-panel p-2 shadow-[0_20px_50px_rgba(30,41,59,0.1)] animate-float">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-white/40 to-transparent z-10 rounded-3xl pointer-events-none"></div>
+                    <img src="https://raw.githubusercontent.com/agelmet/PAPADOPOULOS/refs/heads/main/2%20(2).jpg" alt="Ευάγγελος Παπαδόπουλος" class="w-full h-full object-cover rounded-[1.25rem]">
                 </div>
-                <div class="absolute -z-10 w-[500px] h-[500px] bg-lux-accent/10 rounded-full blur-[100px] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
+                <!-- Decorative Elements -->
+                <div class="absolute -z-10 w-[400px] h-[400px] bg-lux-accent/10 rounded-full blur-[80px] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
             </div>
 
-            <div class="flex flex-col items-center lg:items-center text-center reveal reveal-delay-1 lg:pl-10">
-                <div class="inline-flex items-center gap-3 px-5 py-2 rounded-full glass-light text-lux-accent text-xs font-bold tracking-ultra mb-8 border-white/10">
+            <!-- Right Side: Content -->
+            <div class="flex flex-col items-center lg:items-start text-center lg:text-left reveal reveal-delay-1 lg:pl-10 w-full">
+                <div class="inline-flex items-center gap-3 px-5 py-2 rounded-full bg-white shadow-sm border border-gray-100 text-lux-accent text-[11px] md:text-xs font-bold tracking-ultra mb-8">
                     <span class="w-1.5 h-1.5 rounded-full bg-lux-accent animate-pulse"></span>
                     ΣΩΜΑΤΙΚΗ ΨΥΧΟΘΕΡΑΠΕΙΑ & ΣΥΜΒΟΥΛΕΥΤΙΚΗ
                 </div>
                 
-                <h1 class="text-5xl lg:text-7xl font-serif text-white leading-[1.1] mb-8 drop-shadow-2xl font-light">
-                    Ακούγοντας τη Φωνή <br> <span class="italic text-gradient">του Σώματος.</span>
+                <h1 class="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-serif text-lux-text leading-[1.1] mb-6 drop-shadow-sm font-light">
+                    Ακούγοντας τη Φωνή <br class="hidden sm:block"> <span class="italic text-lux-accent">του Σώματος.</span>
                 </h1>
                 
-                <p class="text-lg md:text-xl text-lux-light/80 mb-12 max-w-lg font-light leading-relaxed">
+                <!-- Portrait Image Mobile Only: Appears right after title -->
+                <div class="lg:hidden w-full max-w-[280px] aspect-[3/4] mx-auto rounded-3xl overflow-hidden glass-panel p-2 shadow-xl mb-8 relative reveal">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-white/40 to-transparent z-10 rounded-3xl pointer-events-none"></div>
+                    <img src="https://raw.githubusercontent.com/agelmet/PAPADOPOULOS/refs/heads/main/2%20(2).jpg" alt="Ευάγγελος Παπαδόπουλος" class="w-full h-full object-cover rounded-[1.25rem]">
+                </div>
+
+                <p class="text-lg md:text-xl text-lux-muted mb-10 max-w-lg font-light leading-relaxed">
                     Ένας απολύτως ασφαλής και υποστηρικτικός χώρος στη Νέα Σμύρνη. Προσεγγίζουμε τον άνθρωπο ως ένα ενιαίο σύνολο, με βαθύ σεβασμό στη μοναδικότητά του.
                 </p>
                 
-                <div class="flex flex-col sm:flex-row items-center justify-center gap-6 w-full">
-                    <a href="#contact" class="px-10 py-4 bg-white text-lux-base rounded-full text-sm font-bold tracking-widest hover:bg-lux-accent hover:text-white transition-all duration-300 shadow-glow flex items-center gap-3 group w-full sm:w-auto justify-center">
+                <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 w-full">
+                    <a href="#contact" class="px-10 py-4 bg-lux-text text-white rounded-full text-sm font-bold tracking-widest hover:bg-lux-accent transition-all duration-300 shadow-glow flex items-center justify-center gap-3 group w-full sm:w-auto">
                         ΚΛΕΙΣΤΕ ΡΑΝΤΕΒΟΥ
                         <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
                     </a>
-                    <a href="#about" class="px-10 py-4 bg-transparent border border-white/20 text-white rounded-full text-sm font-bold tracking-widest hover:border-white hover:bg-white/5 transition-all w-full sm:w-auto justify-center flex items-center">
+                    <a href="#about" class="px-10 py-4 bg-white border border-gray-200 text-lux-text rounded-full text-sm font-bold tracking-widest hover:border-lux-accent hover:bg-gray-50 transition-all w-full sm:w-auto flex items-center justify-center shadow-sm">
                         ΠΕΡΙΣΣΟΤΕΡΑ
                     </a>
                 </div>
@@ -207,14 +213,15 @@
         </div>
     </section>
 
-    <section id="about" class="py-32 px-6 relative bg-lux-base overflow-hidden border-t border-white/5">
+    <!-- About Section -->
+    <section id="about" class="py-32 px-6 relative bg-lux-surface overflow-hidden">
         <div class="max-w-[85rem] mx-auto grid lg:grid-cols-12 gap-16 lg:gap-24 items-center">
             
             <div class="lg:col-span-7 reveal">
                 <span class="text-lux-accent font-bold tracking-ultra text-xs uppercase mb-4 block">Ο ΣΥΜΒΟΥΛΟΣ</span>
-                <h2 class="text-4xl md:text-5xl font-serif text-white mb-8 font-light leading-tight">Ο Ευάγγελος Παπαδόπουλος είναι Σύμβουλος Ψυχικής Υγείας.</h2>
+                <h2 class="text-4xl md:text-5xl font-serif text-lux-text mb-8 font-light leading-tight">Ο Ευάγγελος Παπαδόπουλος είναι Σύμβουλος Ψυχικής Υγείας.</h2>
                 
-                <div class="space-y-6 text-lg text-lux-light/70 font-light leading-relaxed">
+                <div class="space-y-6 text-lg text-lux-muted font-light leading-relaxed">
                     <p>
                         Η κύρια εξειδίκευσή του είναι η Σωματική (Ραϊχική) Ψυχοθεραπεία. Είναι απόφοιτος του Κέντρου Ψυχοθεραπείας και Συμβουλευτικής "Βίλχελμ Ράιχ" (Ελληνικό Ινστιτούτο Νευροφυτοθεραπείας και Ανάλυσης του Χαρακτήρα), ενώ κατέχει μεταπτυχιακό δίπλωμα ειδίκευσης με το ιδιαίτερα εστιασμένο θέμα «Στάση του σώματος και Χαρακτήρας».
                     </p>
@@ -228,10 +235,10 @@
             </div>
 
             <div class="lg:col-span-5 relative reveal reveal-delay-1">
-                <div class="aspect-[3/4] w-full rounded-2xl overflow-hidden glass-dark border border-white/10 relative group">
-                    <img src="https://raw.githubusercontent.com/agelmet/PAPADOPOULOS/refs/heads/main/1%20(1).jpg" alt="Ευάγγελος Παπαδόπουλος Portrait" class="w-full h-full object-cover mask-portrait animate-slow-pan transform group-hover:scale-105 transition-transform duration-[2s] filter contrast-110">
-                    <div class="absolute bottom-0 left-0 w-full p-8 bg-gradient-to-t from-lux-base via-lux-base/80 to-transparent">
-                        <p class="text-white font-serif text-2xl italic">"Ο άνθρωπος είναι ένα ενιαίο σύνολο."</p>
+                <div class="aspect-[3/4] w-full rounded-2xl overflow-hidden bg-lux-base relative group">
+                    <img src="https://raw.githubusercontent.com/agelmet/PAPADOPOULOS/refs/heads/main/1%20(1).jpg" alt="Ευάγγελος Παπαδόπουλος Portrait" class="w-full h-full object-cover mask-portrait animate-slow-pan transform group-hover:scale-105 transition-transform duration-[2s]">
+                    <div class="absolute bottom-0 left-0 w-full p-8 bg-gradient-to-t from-white via-white/80 to-transparent">
+                        <p class="text-lux-text font-serif text-2xl italic text-center">"Ο άνθρωπος είναι ένα ενιαίο σύνολο."</p>
                     </div>
                 </div>
             </div>
@@ -239,71 +246,74 @@
         </div>
     </section>
 
-    <section id="services" class="py-32 px-6 bg-lux-surface relative border-t border-white/5">
-        <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAzNHYtNGgtMnY0aC00djJoNHY0aDJ2LTRoNHYtMmgtNHptMC0zMFYwaC0ydjRoLTR2Mmg0djRoMnYtNGg0VjRoLTR6bS0yMCAxMnYtNGgtMnY0aC00djJoNHY0aDJ2LTRoNHYtMmgtNHptMCAzMnYtNGgtMnY0aC00djJoNHY0aDJ2LTRoNHYtMmgtNHoiIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4wMiIvPjwvZz48L3N2Zz4=')] opacity-50 z-0"></div>
-        
+    <!-- Services Section -->
+    <section id="services" class="py-32 px-6 bg-lux-base relative">
         <div class="max-w-[90rem] mx-auto relative z-10">
             <div class="text-center mb-20 reveal">
                 <span class="text-lux-accent font-bold tracking-ultra text-xs uppercase">ΕΞΕΙΔΙΚΕΥΣΗ & ΥΠΟΣΤΗΡΙΞΗ</span>
-                <h2 class="text-4xl md:text-5xl font-serif text-white mt-4 mb-6 font-light">Υπηρεσίες</h2>
-                <div class="w-12 h-0.5 bg-lux-accent mx-auto"></div>
+                <h2 class="text-4xl md:text-5xl font-serif text-lux-text mt-4 mb-6 font-light">Υπηρεσίες</h2>
+                <div class="w-12 h-px bg-lux-accent mx-auto"></div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 
-                <div class="glass-light p-10 lg:p-14 rounded-3xl group reveal">
-                    <div class="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center mb-8 border border-white/10 group-hover:bg-white/10 transition-colors">
-                        <i data-lucide="user" class="w-8 h-8 text-lux-accent"></i>
+                <!-- Service 1 -->
+                <div class="service-card p-10 lg:p-14 rounded-3xl group reveal">
+                    <div class="w-16 h-16 rounded-2xl bg-lux-base flex items-center justify-center mb-8 border border-gray-100 group-hover:bg-lux-accent transition-colors duration-500">
+                        <i data-lucide="user" class="w-8 h-8 text-lux-accent group-hover:text-white transition-colors duration-500"></i>
                     </div>
-                    <h3 class="text-2xl font-serif text-white mb-4">Ατομική Σωματική Ψυχοθεραπεία & Διαχείριση Τραύματος</h3>
-                    <p class="text-lux-light/60 font-light leading-relaxed mb-8">
+                    <h3 class="text-2xl font-serif text-lux-text mb-4">Ατομική Σωματική Ψυχοθεραπεία & Διαχείριση Τραύματος</h3>
+                    <p class="text-lux-muted font-light leading-relaxed mb-8">
                         Η ατομική συμβουλευτική δεν περιορίζεται μόνο στη λεκτική επικοινωνία. Αξιοποιώντας τη Σωματική Ψυχοθεραπεία και το σωματικό-σχεσιακό μοντέλο τραυματοθεραπείας, δουλεύουμε σε βάθος με τα μπλοκαρίσματα, το άγχος και τα τραύματα που έχουν «εγκλωβιστεί» στο σώμα.
                     </p>
                     <div class="flex flex-wrap gap-2">
-                        <span class="px-4 py-1.5 bg-white/5 border border-white/10 text-lux-accent text-xs font-bold tracking-wider rounded-full">ΕΝΗΛΙΚΕΣ</span>
-                        <span class="px-4 py-1.5 bg-white/5 border border-white/10 text-lux-accent text-xs font-bold tracking-wider rounded-full">ΑΠΕΛΕΥΘΕΡΩΣΗ ΕΝΤΑΣΗΣ</span>
+                        <span class="px-4 py-1.5 bg-lux-base text-lux-accent text-[10px] font-bold tracking-ultra rounded-full border border-gray-100">ΕΝΗΛΙΚΕΣ</span>
+                        <span class="px-4 py-1.5 bg-lux-base text-lux-accent text-[10px] font-bold tracking-ultra rounded-full border border-gray-100">ΑΠΕΛΕΥΘΕΡΩΣΗ ΕΝΤΑΣΗΣ</span>
                     </div>
                 </div>
 
-                <div class="glass-light p-10 lg:p-14 rounded-3xl group reveal reveal-delay-1">
-                    <div class="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center mb-8 border border-white/10 group-hover:bg-white/10 transition-colors">
-                        <i data-lucide="leaf" class="w-8 h-8 text-lux-accent"></i>
+                <!-- Service 2 -->
+                <div class="service-card p-10 lg:p-14 rounded-3xl group reveal reveal-delay-1">
+                    <div class="w-16 h-16 rounded-2xl bg-lux-base flex items-center justify-center mb-8 border border-gray-100 group-hover:bg-lux-accent transition-colors duration-500">
+                        <i data-lucide="leaf" class="w-8 h-8 text-lux-accent group-hover:text-white transition-colors duration-500"></i>
                     </div>
-                    <h3 class="text-2xl font-serif text-white mb-4">Συμβουλευτική Εφήβων (15+) & Ομάδες Πρόληψης</h3>
-                    <p class="text-lux-light/60 font-light leading-relaxed mb-8">
+                    <h3 class="text-2xl font-serif text-lux-text mb-4">Συμβουλευτική Εφήβων (15+) & Ομάδες Πρόληψης</h3>
+                    <p class="text-lux-muted font-light leading-relaxed mb-8">
                         Η εφηβεία είναι μια περίοδος τεράστιων σωματικών και συναισθηματικών αλλαγών. Παρέχεται εξειδικευμένη υποστήριξη μέσα από ατομικές συνεδρίες ή ομάδες, προσφέροντας έναν χώρο χωρίς κριτική για την εξερεύνηση της ταυτότητας και το χτίσιμο υγιών ορίων.
                     </p>
                     <div class="flex flex-wrap gap-2">
-                        <span class="px-4 py-1.5 bg-white/5 border border-white/10 text-lux-accent text-xs font-bold tracking-wider rounded-full">ΕΦΗΒΟΙ 15+</span>
-                        <span class="px-4 py-1.5 bg-white/5 border border-white/10 text-lux-accent text-xs font-bold tracking-wider rounded-full">ΟΡΙΑ & ΕΝΔΥΝΑΜΩΣΗ</span>
+                        <span class="px-4 py-1.5 bg-lux-base text-lux-accent text-[10px] font-bold tracking-ultra rounded-full border border-gray-100">ΕΦΗΒΟΙ 15+</span>
+                        <span class="px-4 py-1.5 bg-lux-base text-lux-accent text-[10px] font-bold tracking-ultra rounded-full border border-gray-100">ΟΡΙΑ & ΕΝΔΥΝΑΜΩΣΗ</span>
                     </div>
                 </div>
 
-                <div class="glass-light p-10 lg:p-14 rounded-3xl group reveal">
-                    <div class="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center mb-8 border border-white/10 group-hover:bg-white/10 transition-colors">
-                        <i data-lucide="users" class="w-8 h-8 text-lux-accent"></i>
+                <!-- Service 3 -->
+                <div class="service-card p-10 lg:p-14 rounded-3xl group reveal">
+                    <div class="w-16 h-16 rounded-2xl bg-lux-base flex items-center justify-center mb-8 border border-gray-100 group-hover:bg-lux-accent transition-colors duration-500">
+                        <i data-lucide="users" class="w-8 h-8 text-lux-accent group-hover:text-white transition-colors duration-500"></i>
                     </div>
-                    <h3 class="text-2xl font-serif text-white mb-4">Ομαδική Ψυχοθεραπεία & Ενδυνάμωση</h3>
-                    <p class="text-lux-light/60 font-light leading-relaxed mb-8">
+                    <h3 class="text-2xl font-serif text-lux-text mb-4">Ομαδική Ψυχοθεραπεία & Ενδυνάμωση</h3>
+                    <p class="text-lux-muted font-light leading-relaxed mb-8">
                         Η ομάδα λειτουργεί ως ένας μικρόκοσμος της κοινωνίας. Με εφόδια τη συνθετική μέθοδο (Gestalt, Ψυχόδραμα), ο σύμβουλος καθοδηγεί ομάδες ενηλίκων, όπου τα μέλη μοιράζονται βιώματα και χτίζουν αυθεντικές σχέσεις.
                     </p>
                     <div class="flex flex-wrap gap-2">
-                        <span class="px-4 py-1.5 bg-white/5 border border-white/10 text-lux-accent text-xs font-bold tracking-wider rounded-full">ΟΜΑΔΕΣ ΕΝΗΛΙΚΩΝ</span>
-                        <span class="px-4 py-1.5 bg-white/5 border border-white/10 text-lux-accent text-xs font-bold tracking-wider rounded-full">GESTALT & ΨΥΧΟΔΡΑΜΑ</span>
+                        <span class="px-4 py-1.5 bg-lux-base text-lux-accent text-[10px] font-bold tracking-ultra rounded-full border border-gray-100">ΟΜΑΔΕΣ ΕΝΗΛΙΚΩΝ</span>
+                        <span class="px-4 py-1.5 bg-lux-base text-lux-accent text-[10px] font-bold tracking-ultra rounded-full border border-gray-100">GESTALT & ΨΥΧΟΔΡΑΜΑ</span>
                     </div>
                 </div>
 
-                <div class="glass-light p-10 lg:p-14 rounded-3xl group reveal reveal-delay-1">
-                    <div class="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center mb-8 border border-white/10 group-hover:bg-white/10 transition-colors">
-                        <i data-lucide="laptop" class="w-8 h-8 text-lux-accent"></i>
+                <!-- Service 4 -->
+                <div class="service-card p-10 lg:p-14 rounded-3xl group reveal reveal-delay-1">
+                    <div class="w-16 h-16 rounded-2xl bg-lux-base flex items-center justify-center mb-8 border border-gray-100 group-hover:bg-lux-accent transition-colors duration-500">
+                        <i data-lucide="laptop" class="w-8 h-8 text-lux-accent group-hover:text-white transition-colors duration-500"></i>
                     </div>
-                    <h3 class="text-2xl font-serif text-white mb-4">Ευέλικτες Συνεδρίες (Δια Ζώσης & Online)</h3>
-                    <p class="text-lux-light/60 font-light leading-relaxed mb-8">
+                    <h3 class="text-2xl font-serif text-lux-text mb-4">Ευέλικτες Συνεδρίες (Δια Ζώσης & Online)</h3>
+                    <p class="text-lux-muted font-light leading-relaxed mb-8">
                         Προσαρμοζόμενο στις σύγχρονες ανάγκες και τον προσωπικό ρυθμό κάθε ατόμου, το γραφείο λειτουργεί από Δευτέρα έως Παρασκευή (κατόπιν ραντεβού). Οι συνεδρίες πραγματοποιούνται είτε δια ζώσης στη Νέα Σμύρνη, είτε διαδικτυακά.
                     </p>
                     <div class="flex flex-wrap gap-2">
-                        <span class="px-4 py-1.5 bg-white/5 border border-white/10 text-lux-accent text-xs font-bold tracking-wider rounded-full">ΝΕΑ ΣΜΥΡΝΗ</span>
-                        <span class="px-4 py-1.5 bg-white/5 border border-white/10 text-lux-accent text-xs font-bold tracking-wider rounded-full">ΕΞ' ΑΠΟΣΤΑΣΕΩΣ</span>
+                        <span class="px-4 py-1.5 bg-lux-base text-lux-accent text-[10px] font-bold tracking-ultra rounded-full border border-gray-100">ΝΕΑ ΣΜΥΡΝΗ</span>
+                        <span class="px-4 py-1.5 bg-lux-base text-lux-accent text-[10px] font-bold tracking-ultra rounded-full border border-gray-100">ΕΞ' ΑΠΟΣΤΑΣΕΩΣ</span>
                     </div>
                 </div>
 
@@ -311,90 +321,95 @@
         </div>
     </section>
 
-    <section id="philosophy" class="py-32 px-6 bg-lux-base relative">
+    <!-- Philosophy / Body Armor Section -->
+    <section id="philosophy" class="py-32 px-6 bg-lux-surface relative border-t border-gray-100">
         <div class="max-w-[60rem] mx-auto text-center reveal">
-            <h2 class="text-4xl md:text-5xl font-serif text-white mb-10 font-light">Η «Θωράκιση» του Σώματος:<br>Πώς τα Συναισθήματά μας Αποτυπώνονται στους Μύες</h2>
-            <p class="text-xl text-lux-accent italic font-serif mb-12">«Λογικά τα καταλαβαίνω όλα, αλλά το σώμα μου συνεχίζει να νιώθει πανικό, βάρος ή εξάντληση»</p>
+            <h2 class="text-4xl md:text-5xl font-serif text-lux-text mb-10 font-light leading-tight">Η «Θωράκιση» του Σώματος:<br>Πώς τα Συναισθήματά μας Αποτυπώνονται στους Μύες</h2>
+            <p class="text-xl md:text-2xl text-lux-accent italic font-serif mb-12">«Λογικά τα καταλαβαίνω όλα, αλλά το σώμα μου συνεχίζει να νιώθει πανικό, βάρος ή εξάντληση»</p>
         </div>
 
         <div class="max-w-[70rem] mx-auto space-y-10">
-            <div class="glass-light p-8 md:p-12 rounded-2xl border border-white/5 reveal">
-                <p class="text-lux-light/80 text-lg font-light leading-relaxed mb-6">
+            <div class="bg-lux-base p-8 md:p-14 rounded-3xl border border-gray-100 reveal">
+                <p class="text-lux-muted text-lg font-light leading-relaxed mb-10 text-center md:text-left">
                     Στην κλασική συμβουλευτική, έχουμε μάθει να χρησιμοποιούμε κυρίως το μυαλό και τον λόγο για να λύσουμε τα προβλήματά μας. Εδώ ακριβώς έρχεται να δώσει απαντήσεις η <strong>Σωματική (Ραϊχική) Ψυχοθεραπεία</strong>.
                 </p>
-                <div class="space-y-8 mt-10">
-                    <div class="border-l-2 border-lux-accent pl-6">
-                        <h4 class="text-xl font-serif text-white mb-3">Η Μυϊκή Θωράκιση</h4>
-                        <p class="text-lux-light/60 font-light leading-relaxed">Όταν καταπιέζουμε συναισθήματα, το σώμα σφίγγεται για να τα «κρατήσει» μέσα του. Αυτό δημιουργεί τη «μυϊκή θωράκιση» (Wilhelm Reich). Ένα τραύμα ή χρόνιο άγχος κατοικεί στον σφιγμένο αυχένα, στη ρηχή αναπνοή, στο στομάχι.</p>
+                <div class="space-y-10">
+                    <div class="border-l-2 border-lux-accent pl-6 hover:border-l-4 transition-all duration-300">
+                        <h4 class="text-xl font-serif text-lux-text mb-3">Η Μυϊκή Θωράκιση</h4>
+                        <p class="text-lux-muted font-light leading-relaxed">Όταν καταπιέζουμε συναισθήματα, το σώμα σφίγγεται για να τα «κρατήσει» μέσα του. Αυτό δημιουργεί τη «μυϊκή θωράκιση» (Wilhelm Reich). Ένα τραύμα ή χρόνιο άγχος κατοικεί στον σφιγμένο αυχένα, στη ρηχή αναπνοή, στο στομάχι.</p>
                     </div>
-                    <div class="border-l-2 border-lux-accent pl-6">
-                        <h4 class="text-xl font-serif text-white mb-3">Το Σώμα ως Πύλη για το Τραύμα</h4>
-                        <p class="text-lux-light/60 font-light leading-relaxed">Δεν μπορούμε να επουλώσουμε ένα βαθύ τραύμα μόνο μιλώντας. Οι λέξεις δεν φτάνουν. Στη συνεδρία, δίνουμε χώρο στο σώμα να εκφράσει την αλήθεια του παρατηρώντας την αναπνοή, την κίνηση και τις εντάσεις.</p>
+                    <div class="border-l-2 border-lux-accent pl-6 hover:border-l-4 transition-all duration-300">
+                        <h4 class="text-xl font-serif text-lux-text mb-3">Το Σώμα ως Πύλη για το Τραύμα</h4>
+                        <p class="text-lux-muted font-light leading-relaxed">Δεν μπορούμε να επουλώσουμε ένα βαθύ τραύμα μόνο μιλώντας. Οι λέξεις δεν φτάνουν. Στη συνεδρία, δίνουμε χώρο στο σώμα να εκφράσει την αλήθεια του παρατηρώντας την αναπνοή, την κίνηση και τις εντάσεις.</p>
                     </div>
-                    <div class="border-l-2 border-lux-accent pl-6">
-                        <h4 class="text-xl font-serif text-white mb-3">Η Συνθετική Απελευθέρωση</h4>
-                        <p class="text-lux-light/60 font-light leading-relaxed">Με εργαλεία από τη Gestalt και το Ψυχόδραμα, βοηθάμε το νευρικό σύστημα να αποφορτιστεί. Όταν το σώμα χαλαρώνει την «πανοπλία» του, τα εγκλωβισμένα συναισθήματα ρέουν και η ενέργεια μετατρέπεται σε ζωτικότητα.</p>
+                    <div class="border-l-2 border-lux-accent pl-6 hover:border-l-4 transition-all duration-300">
+                        <h4 class="text-xl font-serif text-lux-text mb-3">Η Συνθετική Απελευθέρωση</h4>
+                        <p class="text-lux-muted font-light leading-relaxed">Με εργαλεία από τη Gestalt και το Ψυχόδραμα, βοηθάμε το νευρικό σύστημα να αποφορτιστεί. Όταν το σώμα χαλαρώνει την «πανοπλία» του, τα εγκλωβισμένα συναισθήματα ρέουν και η ενέργεια μετατρέπεται σε ζωτικότητα.</p>
                     </div>
                 </div>
             </div>
             
             <div class="text-center mt-12 reveal">
-                <p class="text-xl font-serif text-white italic">"Στο γραφείο μου, σας ακούω με τα αυτιά, αλλά «ακούω» και αυτό που έχει να πει το σώμα σας, με απόλυτο σεβασμό στον δικό σας ρυθμό."</p>
+                <p class="text-xl md:text-2xl font-serif text-lux-text italic font-light">"Στο γραφείο μου, σας ακούω με τα αυτιά, αλλά «ακούω» και αυτό που έχει να πει το σώμα σας, με απόλυτο σεβασμό στον δικό σας ρυθμό."</p>
             </div>
         </div>
     </section>
 
-    <section class="py-32 px-6 bg-lux-surface border-t border-b border-white/5 relative overflow-hidden">
-        <div class="absolute -right-64 top-0 w-[500px] h-[500px] bg-lux-accent/5 rounded-full blur-[120px]"></div>
-        
+    <!-- Roadmap Section -->
+    <section class="py-32 px-6 bg-lux-base border-t border-gray-100 relative overflow-hidden">
         <div class="max-w-[70rem] mx-auto">
             <div class="text-center mb-24 reveal">
-                <h2 class="text-4xl md:text-5xl font-serif text-white mb-4 font-light">Η Διαδρομή της Θεραπείας</h2>
-                <p class="text-lux-light/60">Τα βήματα προς τη συνθετική απελευθέρωση και ενδυνάμωση.</p>
+                <h2 class="text-4xl md:text-5xl font-serif text-lux-text mb-4 font-light">Η Διαδρομή της Θεραπείας</h2>
+                <p class="text-lux-muted">Τα βήματα προς τη συνθετική απελευθέρωση και ενδυνάμωση.</p>
             </div>
 
             <div class="relative">
-                <div class="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-lux-accent/0 via-lux-accent/30 to-lux-accent/0 transform -translate-x-1/2"></div>
+                <!-- Vertical Line -->
+                <div class="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-lux-accent/30 to-transparent transform -translate-x-1/2"></div>
 
-                <div class="space-y-20">
+                <div class="space-y-16">
                     
+                    <!-- Step 1 -->
                     <div class="flex flex-col md:flex-row items-center justify-between w-full reveal group">
-                        <div class="md:w-[45%] md:text-right pr-0 md:pr-12 mb-8 md:mb-0">
-                            <span class="text-lux-accent font-bold tracking-ultra text-xs mb-2 block">ΒΗΜΑ 01</span>
-                            <h4 class="text-2xl font-serif text-white mb-3">Πρώτη Επικοινωνία</h4>
-                            <p class="text-lux-light/60 font-light">Επικοινωνείτε για να κλείσουμε το πρώτο σας ραντεβού στον ασφαλή χώρο του γραφείου ή διαδικτυακά.</p>
+                        <div class="md:w-[45%] md:text-right pr-0 md:pr-12 mb-6 md:mb-0 text-center md:text-right bg-white p-6 rounded-2xl shadow-sm border border-gray-50 md:bg-transparent md:p-0 md:border-none md:shadow-none">
+                            <span class="text-lux-accent font-bold tracking-ultra text-[10px] mb-2 block">ΒΗΜΑ 01</span>
+                            <h4 class="text-2xl font-serif text-lux-text mb-3">Πρώτη Επικοινωνία</h4>
+                            <p class="text-lux-muted font-light text-sm md:text-base">Επικοινωνείτε για να κλείσουμε το πρώτο σας ραντεβού στον ασφαλή χώρο του γραφείου ή διαδικτυακά.</p>
                         </div>
-                        <div class="relative z-10 flex items-center justify-center w-4 h-4 rounded-full bg-lux-accent shadow-[0_0_15px_rgba(139,140,137,0.5)] group-hover:scale-150 transition-transform duration-500"></div>
+                        <div class="relative z-10 flex items-center justify-center w-6 h-6 rounded-full bg-white border-4 border-lux-accent shadow-[0_0_15px_rgba(100,116,139,0.2)] group-hover:scale-125 transition-transform duration-500"></div>
                         <div class="md:w-[45%] hidden md:block"></div>
                     </div>
 
+                    <!-- Step 2 -->
                     <div class="flex flex-col md:flex-row-reverse items-center justify-between w-full reveal group">
-                        <div class="md:w-[45%] md:text-left pl-0 md:pl-12 mb-8 md:mb-0 text-center md:text-left">
-                            <span class="text-lux-accent font-bold tracking-ultra text-xs mb-2 block">ΒΗΜΑ 02</span>
-                            <h4 class="text-2xl font-serif text-white mb-3">Αξιολόγηση & Σύνδεση</h4>
-                            <p class="text-lux-light/60 font-light">Μια γνωριμία χωρίς καμία κριτική, για να κατανοήσουμε τις ανάγκες σας και να χτίσουμε τη θεραπευτική συμμαχία.</p>
+                        <div class="md:w-[45%] md:text-left pl-0 md:pl-12 mb-6 md:mb-0 text-center md:text-left bg-white p-6 rounded-2xl shadow-sm border border-gray-50 md:bg-transparent md:p-0 md:border-none md:shadow-none">
+                            <span class="text-lux-accent font-bold tracking-ultra text-[10px] mb-2 block">ΒΗΜΑ 02</span>
+                            <h4 class="text-2xl font-serif text-lux-text mb-3">Αξιολόγηση & Σύνδεση</h4>
+                            <p class="text-lux-muted font-light text-sm md:text-base">Μια γνωριμία χωρίς καμία κριτική, για να κατανοήσουμε τις ανάγκες σας και να χτίσουμε τη θεραπευτική συμμαχία.</p>
                         </div>
-                        <div class="relative z-10 flex items-center justify-center w-4 h-4 rounded-full bg-lux-surface border border-lux-accent group-hover:bg-lux-accent group-hover:shadow-[0_0_15px_rgba(139,140,137,0.5)] transition-all duration-500"></div>
+                        <div class="relative z-10 flex items-center justify-center w-6 h-6 rounded-full bg-white border-4 border-lux-accent shadow-[0_0_15px_rgba(100,116,139,0.2)] group-hover:scale-125 transition-transform duration-500"></div>
                         <div class="md:w-[45%] hidden md:block"></div>
                     </div>
 
+                    <!-- Step 3 -->
                     <div class="flex flex-col md:flex-row items-center justify-between w-full reveal group">
-                        <div class="md:w-[45%] md:text-right pr-0 md:pr-12 mb-8 md:mb-0">
-                            <span class="text-lux-accent font-bold tracking-ultra text-xs mb-2 block">ΒΗΜΑ 03</span>
-                            <h4 class="text-2xl font-serif text-white mb-3">Σωματική Διερεύνηση</h4>
-                            <p class="text-lux-light/60 font-light">Σταδιακή ενσωμάτωση της Σωματικής Ψυχοθεραπείας, δίνοντας προσοχή στην αναπνοή και τη μυϊκή ένταση.</p>
+                        <div class="md:w-[45%] md:text-right pr-0 md:pr-12 mb-6 md:mb-0 text-center md:text-right bg-white p-6 rounded-2xl shadow-sm border border-gray-50 md:bg-transparent md:p-0 md:border-none md:shadow-none">
+                            <span class="text-lux-accent font-bold tracking-ultra text-[10px] mb-2 block">ΒΗΜΑ 03</span>
+                            <h4 class="text-2xl font-serif text-lux-text mb-3">Σωματική Διερεύνηση</h4>
+                            <p class="text-lux-muted font-light text-sm md:text-base">Σταδιακή ενσωμάτωση της Σωματικής Ψυχοθεραπείας, δίνοντας προσοχή στην αναπνοή και τη μυϊκή ένταση.</p>
                         </div>
-                        <div class="relative z-10 flex items-center justify-center w-4 h-4 rounded-full bg-lux-surface border border-lux-accent group-hover:bg-lux-accent group-hover:shadow-[0_0_15px_rgba(139,140,137,0.5)] transition-all duration-500"></div>
+                        <div class="relative z-10 flex items-center justify-center w-6 h-6 rounded-full bg-white border-4 border-lux-accent shadow-[0_0_15px_rgba(100,116,139,0.2)] group-hover:scale-125 transition-transform duration-500"></div>
                         <div class="md:w-[45%] hidden md:block"></div>
                     </div>
 
+                    <!-- Step 4 -->
                     <div class="flex flex-col md:flex-row-reverse items-center justify-between w-full reveal group">
-                        <div class="md:w-[45%] md:text-left pl-0 md:pl-12 text-center md:text-left">
-                            <span class="text-lux-accent font-bold tracking-ultra text-xs mb-2 block">ΒΗΜΑ 04</span>
-                            <h4 class="text-2xl font-serif text-white mb-3">Απελευθέρωση & Εξέλιξη</h4>
-                            <p class="text-lux-light/60 font-light">Η σταδιακή λύση της "πανοπλίας" οδηγεί σε βαθιά αυτογνωσία, ροή ενέργειας και ουσιαστική ενδυνάμωση.</p>
+                        <div class="md:w-[45%] md:text-left pl-0 md:pl-12 text-center md:text-left bg-white p-6 rounded-2xl shadow-sm border border-gray-50 md:bg-transparent md:p-0 md:border-none md:shadow-none">
+                            <span class="text-lux-accent font-bold tracking-ultra text-[10px] mb-2 block">ΒΗΜΑ 04</span>
+                            <h4 class="text-2xl font-serif text-lux-text mb-3">Απελευθέρωση & Εξέλιξη</h4>
+                            <p class="text-lux-muted font-light text-sm md:text-base">Η σταδιακή λύση της "πανοπλίας" οδηγεί σε βαθιά αυτογνωσία, ροή ενέργειας και ουσιαστική ενδυνάμωση.</p>
                         </div>
-                        <div class="relative z-10 flex items-center justify-center w-4 h-4 rounded-full bg-lux-surface border border-lux-accent group-hover:bg-lux-accent group-hover:shadow-[0_0_15px_rgba(139,140,137,0.5)] transition-all duration-500"></div>
+                        <div class="relative z-10 flex items-center justify-center w-6 h-6 rounded-full bg-white border-4 border-lux-accent shadow-[0_0_15px_rgba(100,116,139,0.2)] group-hover:scale-125 transition-transform duration-500"></div>
                         <div class="md:w-[45%] hidden md:block"></div>
                     </div>
 
@@ -403,105 +418,111 @@
         </div>
     </section>
 
-    <section id="space" class="py-32 px-6 bg-lux-base">
+    <!-- The Space (Gallery) Section -->
+    <section id="space" class="py-32 px-6 bg-lux-surface border-t border-gray-100">
         <div class="max-w-[90rem] mx-auto">
             <div class="text-center mb-16 reveal">
-                <h2 class="text-4xl md:text-5xl font-serif text-white mb-6 font-light">Ο Χώρος του Γραφείου</h2>
-                <p class="text-lux-light/60 max-w-2xl mx-auto font-light">Ένα περιβάλλον απόλυτης ιδιωτικότητας και ηρεμίας στη Νέα Σμύρνη, σχεδιασμένο για να προσφέρει την απαραίτητη ασφάλεια κατά τη θεραπευτική διαδικασία.</p>
+                <h2 class="text-4xl md:text-5xl font-serif text-lux-text mb-6 font-light">Ο Χώρος του Γραφείου</h2>
+                <p class="text-lux-muted max-w-2xl mx-auto font-light">Ένα φωτεινό περιβάλλον απόλυτης ιδιωτικότητας και ηρεμίας στη Νέα Σμύρνη, σχεδιασμένο για να προσφέρει την απαραίτητη ασφάλεια κατά τη θεραπευτική διαδικασία.</p>
             </div>
 
+            <!-- Symmetrical Masonry Layout (Uncropped Images) -->
             <div class="columns-1 md:columns-2 lg:columns-4 gap-4 space-y-4">
-                <button class="w-full break-inside-avoid overflow-hidden group relative reveal cursor-zoom-in" onclick="openLightbox('https://raw.githubusercontent.com/agelmet/PAPADOPOULOS/refs/heads/main/n11.jpg')">
+                <button class="w-full break-inside-avoid overflow-hidden group relative reveal cursor-zoom-in rounded-xl border border-gray-100" onclick="openLightbox('https://raw.githubusercontent.com/agelmet/PAPADOPOULOS/refs/heads/main/n11.jpg')">
                     <img src="https://raw.githubusercontent.com/agelmet/PAPADOPOULOS/refs/heads/main/n11.jpg" alt="Χώρος Γραφείου" class="w-full h-auto transform group-hover:scale-105 transition-transform duration-700">
-                    <div class="absolute inset-0 bg-lux-base/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-sm">
-                        <i data-lucide="maximize" class="w-6 h-6 text-white"></i>
+                    <div class="absolute inset-0 bg-white/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px]">
+                        <i data-lucide="maximize" class="w-8 h-8 text-lux-text"></i>
                     </div>
                 </button>
-                <button class="w-full break-inside-avoid overflow-hidden group relative reveal reveal-delay-1 cursor-zoom-in" onclick="openLightbox('https://raw.githubusercontent.com/agelmet/PAPADOPOULOS/refs/heads/main/n12.jpg')">
+                <button class="w-full break-inside-avoid overflow-hidden group relative reveal reveal-delay-1 cursor-zoom-in rounded-xl border border-gray-100" onclick="openLightbox('https://raw.githubusercontent.com/agelmet/PAPADOPOULOS/refs/heads/main/n12.jpg')">
                     <img src="https://raw.githubusercontent.com/agelmet/PAPADOPOULOS/refs/heads/main/n12.jpg" alt="Χώρος Γραφείου" class="w-full h-auto transform group-hover:scale-105 transition-transform duration-700">
-                    <div class="absolute inset-0 bg-lux-base/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-sm">
-                        <i data-lucide="maximize" class="w-6 h-6 text-white"></i>
+                    <div class="absolute inset-0 bg-white/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px]">
+                        <i data-lucide="maximize" class="w-8 h-8 text-lux-text"></i>
                     </div>
                 </button>
-                <button class="w-full break-inside-avoid overflow-hidden group relative reveal reveal-delay-2 cursor-zoom-in" onclick="openLightbox('https://raw.githubusercontent.com/agelmet/PAPADOPOULOS/refs/heads/main/n14.jpg')">
+                <button class="w-full break-inside-avoid overflow-hidden group relative reveal reveal-delay-2 cursor-zoom-in rounded-xl border border-gray-100" onclick="openLightbox('https://raw.githubusercontent.com/agelmet/PAPADOPOULOS/refs/heads/main/n14.jpg')">
                     <img src="https://raw.githubusercontent.com/agelmet/PAPADOPOULOS/refs/heads/main/n14.jpg" alt="Χώρος Γραφείου" class="w-full h-auto transform group-hover:scale-105 transition-transform duration-700">
-                    <div class="absolute inset-0 bg-lux-base/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-sm">
-                        <i data-lucide="maximize" class="w-6 h-6 text-white"></i>
+                    <div class="absolute inset-0 bg-white/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px]">
+                        <i data-lucide="maximize" class="w-8 h-8 text-lux-text"></i>
                     </div>
                 </button>
-                <button class="w-full break-inside-avoid overflow-hidden group relative reveal cursor-zoom-in" onclick="openLightbox('https://raw.githubusercontent.com/agelmet/PAPADOPOULOS/refs/heads/main/n15.jpg')">
+                <button class="w-full break-inside-avoid overflow-hidden group relative reveal cursor-zoom-in rounded-xl border border-gray-100" onclick="openLightbox('https://raw.githubusercontent.com/agelmet/PAPADOPOULOS/refs/heads/main/n15.jpg')">
                     <img src="https://raw.githubusercontent.com/agelmet/PAPADOPOULOS/refs/heads/main/n15.jpg" alt="Χώρος Γραφείου" class="w-full h-auto transform group-hover:scale-105 transition-transform duration-700">
-                    <div class="absolute inset-0 bg-lux-base/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-sm">
-                        <i data-lucide="maximize" class="w-6 h-6 text-white"></i>
+                    <div class="absolute inset-0 bg-white/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px]">
+                        <i data-lucide="maximize" class="w-8 h-8 text-lux-text"></i>
                     </div>
                 </button>
-                <button class="w-full break-inside-avoid overflow-hidden group relative reveal reveal-delay-1 cursor-zoom-in" onclick="openLightbox('https://raw.githubusercontent.com/agelmet/PAPADOPOULOS/refs/heads/main/n16.jpg')">
+                <button class="w-full break-inside-avoid overflow-hidden group relative reveal reveal-delay-1 cursor-zoom-in rounded-xl border border-gray-100" onclick="openLightbox('https://raw.githubusercontent.com/agelmet/PAPADOPOULOS/refs/heads/main/n16.jpg')">
                     <img src="https://raw.githubusercontent.com/agelmet/PAPADOPOULOS/refs/heads/main/n16.jpg" alt="Χώρος Γραφείου" class="w-full h-auto transform group-hover:scale-105 transition-transform duration-700">
-                    <div class="absolute inset-0 bg-lux-base/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-sm">
-                        <i data-lucide="maximize" class="w-6 h-6 text-white"></i>
+                    <div class="absolute inset-0 bg-white/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px]">
+                        <i data-lucide="maximize" class="w-8 h-8 text-lux-text"></i>
                     </div>
                 </button>
-                <button class="w-full break-inside-avoid overflow-hidden group relative reveal reveal-delay-2 cursor-zoom-in" onclick="openLightbox('https://raw.githubusercontent.com/agelmet/PAPADOPOULOS/refs/heads/main/n17.jpg')">
+                <button class="w-full break-inside-avoid overflow-hidden group relative reveal reveal-delay-2 cursor-zoom-in rounded-xl border border-gray-100" onclick="openLightbox('https://raw.githubusercontent.com/agelmet/PAPADOPOULOS/refs/heads/main/n17.jpg')">
                     <img src="https://raw.githubusercontent.com/agelmet/PAPADOPOULOS/refs/heads/main/n17.jpg" alt="Χώρος Γραφείου" class="w-full h-auto transform group-hover:scale-105 transition-transform duration-700">
-                    <div class="absolute inset-0 bg-lux-base/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-sm">
-                        <i data-lucide="maximize" class="w-6 h-6 text-white"></i>
+                    <div class="absolute inset-0 bg-white/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px]">
+                        <i data-lucide="maximize" class="w-8 h-8 text-lux-text"></i>
                     </div>
                 </button>
-                <button class="w-full break-inside-avoid overflow-hidden group relative reveal cursor-zoom-in" onclick="openLightbox('https://raw.githubusercontent.com/agelmet/PAPADOPOULOS/refs/heads/main/office2.jpg')">
+                <button class="w-full break-inside-avoid overflow-hidden group relative reveal cursor-zoom-in rounded-xl border border-gray-100" onclick="openLightbox('https://raw.githubusercontent.com/agelmet/PAPADOPOULOS/refs/heads/main/office2.jpg')">
                     <img src="https://raw.githubusercontent.com/agelmet/PAPADOPOULOS/refs/heads/main/office2.jpg" alt="Χώρος Γραφείου" class="w-full h-auto transform group-hover:scale-105 transition-transform duration-700">
-                    <div class="absolute inset-0 bg-lux-base/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-sm">
-                        <i data-lucide="maximize" class="w-6 h-6 text-white"></i>
+                    <div class="absolute inset-0 bg-white/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px]">
+                        <i data-lucide="maximize" class="w-8 h-8 text-lux-text"></i>
                     </div>
                 </button>
-                <button class="w-full break-inside-avoid overflow-hidden group relative reveal reveal-delay-1 cursor-zoom-in" onclick="openLightbox('https://raw.githubusercontent.com/agelmet/PAPADOPOULOS/refs/heads/main/office3.jpg')">
+                <button class="w-full break-inside-avoid overflow-hidden group relative reveal reveal-delay-1 cursor-zoom-in rounded-xl border border-gray-100" onclick="openLightbox('https://raw.githubusercontent.com/agelmet/PAPADOPOULOS/refs/heads/main/office3.jpg')">
                     <img src="https://raw.githubusercontent.com/agelmet/PAPADOPOULOS/refs/heads/main/office3.jpg" alt="Χώρος Γραφείου" class="w-full h-auto transform group-hover:scale-105 transition-transform duration-700">
-                    <div class="absolute inset-0 bg-lux-base/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-sm">
-                        <i data-lucide="maximize" class="w-6 h-6 text-white"></i>
+                    <div class="absolute inset-0 bg-white/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px]">
+                        <i data-lucide="maximize" class="w-8 h-8 text-lux-text"></i>
                     </div>
                 </button>
             </div>
         </div>
     </section>
 
-    <section class="py-32 px-6 bg-lux-surface border-t border-white/5">
+    <!-- FAQ Section -->
+    <section class="py-32 px-6 bg-lux-base border-t border-gray-100">
         <div class="max-w-[50rem] mx-auto">
             <div class="text-center mb-16 reveal">
-                <h2 class="text-4xl md:text-5xl font-serif text-white mb-4 font-light">Συχνές Ερωτήσεις</h2>
-                <p class="text-lux-light/60">Λύνοντας βασικές απορίες για τη διαδικασία της θεραπείας.</p>
+                <h2 class="text-4xl md:text-5xl font-serif text-lux-text mb-4 font-light">Συχνές Ερωτήσεις</h2>
+                <p class="text-lux-muted">Λύνοντας βασικές απορίες για τη διαδικασία της θεραπείας.</p>
             </div>
 
             <div class="space-y-4">
-                <div class="faq-item bg-lux-base border border-white/10 rounded-2xl overflow-hidden reveal cursor-pointer" onclick="this.classList.toggle('active')">
+                <!-- FAQ Item 1 -->
+                <div class="faq-item bg-white border border-gray-100 rounded-2xl overflow-hidden reveal shadow-sm cursor-pointer hover:border-lux-accent transition-colors" onclick="this.classList.toggle('active')">
                     <div class="p-6 flex justify-between items-center">
-                        <h4 class="font-serif text-xl text-white">Τι είναι ακριβώς η Σωματική Ψυχοθεραπεία;</h4>
+                        <h4 class="font-serif text-xl text-lux-text">Τι είναι ακριβώς η Σωματική Ψυχοθεραπεία;</h4>
                         <i data-lucide="chevron-down" class="w-5 h-5 text-lux-accent faq-icon"></i>
                     </div>
-                    <div class="faq-content bg-white/5">
-                        <div class="p-6 pt-0 text-lux-light/70 font-light text-sm">
+                    <div class="faq-content bg-gray-50/50 border-t border-gray-50">
+                        <div class="p-6 text-lux-muted font-light text-sm leading-relaxed">
                             Είναι μια προσέγγιση που συνδυάζει την παραδοσιακή λεκτική ψυχοθεραπεία με την παρατήρηση και έκφραση του σώματος. Θεωρεί ότι οι εμπειρίες και τα συναισθήματά μας αποθηκεύονται στους μύες (ως ένταση) και μέσα από ειδικές τεχνικές, βοηθά στην απελευθέρωσή τους.
                         </div>
                     </div>
                 </div>
 
-                <div class="faq-item bg-lux-base border border-white/10 rounded-2xl overflow-hidden reveal reveal-delay-1 cursor-pointer" onclick="this.classList.toggle('active')">
+                <!-- FAQ Item 2 -->
+                <div class="faq-item bg-white border border-gray-100 rounded-2xl overflow-hidden reveal reveal-delay-1 shadow-sm cursor-pointer hover:border-lux-accent transition-colors" onclick="this.classList.toggle('active')">
                     <div class="p-6 flex justify-between items-center">
-                        <h4 class="font-serif text-xl text-white">Σε ποιες ηλικίες απευθύνεστε;</h4>
+                        <h4 class="font-serif text-xl text-lux-text">Σε ποιες ηλικίες απευθύνεστε;</h4>
                         <i data-lucide="chevron-down" class="w-5 h-5 text-lux-accent faq-icon"></i>
                     </div>
-                    <div class="faq-content bg-white/5">
-                        <div class="p-6 pt-0 text-lux-light/70 font-light text-sm">
+                    <div class="faq-content bg-gray-50/50 border-t border-gray-50">
+                        <div class="p-6 text-lux-muted font-light text-sm leading-relaxed">
                             Οι υπηρεσίες του γραφείου απευθύνονται σε ενήλικες (μέσα από ατομική ή ομαδική θεραπεία) καθώς και σε εφήβους ηλικίας 15 ετών και άνω, μέσα από ατομική συμβουλευτική ή ομάδες πρόληψης και ενδυνάμωσης.
                         </div>
                     </div>
                 </div>
 
-                <div class="faq-item bg-lux-base border border-white/10 rounded-2xl overflow-hidden reveal cursor-pointer" onclick="this.classList.toggle('active')">
+                <!-- FAQ Item 3 -->
+                <div class="faq-item bg-white border border-gray-100 rounded-2xl overflow-hidden reveal shadow-sm cursor-pointer hover:border-lux-accent transition-colors" onclick="this.classList.toggle('active')">
                     <div class="p-6 flex justify-between items-center">
-                        <h4 class="font-serif text-xl text-white">Μπορώ να κάνω συνεδρίες διαδικτυακά (online);</h4>
+                        <h4 class="font-serif text-xl text-lux-text">Μπορώ να κάνω συνεδρίες διαδικτυακά (online);</h4>
                         <i data-lucide="chevron-down" class="w-5 h-5 text-lux-accent faq-icon"></i>
                     </div>
-                    <div class="faq-content bg-white/5">
-                        <div class="p-6 pt-0 text-lux-light/70 font-light text-sm">
+                    <div class="faq-content bg-gray-50/50 border-t border-gray-50">
+                        <div class="p-6 text-lux-muted font-light text-sm leading-relaxed">
                             Ναι, οι συνεδρίες μπορούν να πραγματοποιηθούν και εξ' αποστάσεως (διαδικτυακά) μέσω βιντεοκλήσης, διατηρώντας απόλυτα την ποιότητα, τη σταθερότητα και την εμπιστευτικότητα της θεραπευτικής διαδικασίας.
                         </div>
                     </div>
@@ -510,38 +531,40 @@
         </div>
     </section>
 
-    <footer id="contact" class="bg-[#0a0d14] border-t border-white/5 pt-32 pb-12 relative overflow-hidden">
+    <!-- Footer / Contact -->
+    <footer id="contact" class="bg-white border-t border-gray-200 pt-32 pb-12 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-t from-gray-50 to-white z-0"></div>
         <div class="max-w-[90rem] mx-auto px-6 relative z-10">
             
             <div class="grid md:grid-cols-2 lg:grid-cols-12 gap-16 mb-24">
                 
                 <div class="lg:col-span-5 reveal">
-                    <h2 class="text-3xl font-serif text-white mb-6">Επικοινωνία</h2>
-                    <p class="text-lux-light/60 font-light leading-relaxed mb-10 max-w-sm">
+                    <h2 class="text-3xl font-serif text-lux-text mb-6">Επικοινωνία</h2>
+                    <p class="text-lux-muted font-light leading-relaxed mb-10 max-w-sm">
                         Κάντε το πρώτο βήμα. Επικοινωνήστε μαζί μας για να ορίσουμε την πρώτη σας συνεδρία σε ένα περιβάλλον απόλυτης αποδοχής και ασφάλειας.
                     </p>
-                    <a href="tel:+306974321514" class="inline-flex items-center justify-center bg-white text-lux-base px-8 py-4 rounded-full text-sm font-bold tracking-widest hover:bg-lux-accent hover:text-white transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.1)]">
+                    <a href="tel:+306974321514" class="inline-flex items-center justify-center bg-lux-text text-white px-10 py-4 rounded-full text-sm font-bold tracking-widest hover:bg-lux-accent transition-all duration-300 shadow-sm">
                         ΚΑΛΕΣΤΕ ΤΩΡΑ
                     </a>
                 </div>
 
                 <div class="lg:col-span-3 lg:col-start-7 reveal reveal-delay-1">
                     <h4 class="text-xs font-bold text-lux-accent mb-6 uppercase tracking-ultra">ΣΤΟΙΧΕΙΑ ΕΠΙΚΟΙΝΩΝΙΑΣ</h4>
-                    <ul class="space-y-6 text-lux-light/70 font-light">
+                    <ul class="space-y-6 text-lux-muted font-light">
                         <li class="flex items-start gap-4">
                             <i data-lucide="map-pin" class="w-5 h-5 text-lux-accent shrink-0 mt-0.5"></i>
                             <span>Νυμφαίου 4, Τ.Κ. 171 21<br>Νέα Σμύρνη, Αττική</span>
                         </li>
                         <li class="flex items-center gap-4">
                             <i data-lucide="phone" class="w-5 h-5 text-lux-accent shrink-0"></i>
-                            <a href="tel:+306974321514" class="hover:text-white transition-colors text-lg tracking-wider">697 4321 514</a>
+                            <a href="tel:+306974321514" class="hover:text-lux-text transition-colors font-medium text-lg tracking-wider">697 4321 514</a>
                         </li>
                     </ul>
                 </div>
 
                 <div class="lg:col-span-3 reveal reveal-delay-2">
                     <h4 class="text-xs font-bold text-lux-accent mb-6 uppercase tracking-ultra">ΩΡΑΡΙΟ ΛΕΙΤΟΥΡΓΙΑΣ</h4>
-                    <ul class="space-y-4 text-lux-light/70 font-light">
+                    <ul class="space-y-4 text-lux-muted font-light">
                         <li class="flex items-center gap-4">
                             <i data-lucide="clock" class="w-5 h-5 text-lux-accent shrink-0"></i>
                             <span class="tracking-wide">Δευτέρα – Παρασκευή</span>
@@ -552,22 +575,24 @@
 
             </div>
 
-            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-6 reveal">
-                <p class="text-lux-light/40 text-xs tracking-wider">© 2026 Ευάγγελος Παπαδόπουλος. Όλα τα δικαιώματα διατηρούνται.</p>
-                <p class="text-lux-light/40 text-xs tracking-wider">
-                    Designed by <a href="https://advonmedia.com" target="_blank" rel="noopener" class="text-lux-light hover:text-white transition-colors font-medium">Advon Media</a>
+            <div class="border-t border-gray-200 pt-8 flex flex-col md:flex-row justify-between items-center gap-6 reveal">
+                <p class="text-gray-400 text-xs tracking-wider">© 2026 Ευάγγελος Παπαδόπουλος. Όλα τα δικαιώματα διατηρούνται.</p>
+                <p class="text-gray-400 text-xs tracking-wider">
+                    Designed by <a href="https://advonmedia.com" target="_blank" rel="noopener" class="text-lux-muted hover:text-lux-text transition-colors font-bold">Advon Media</a>
                 </p>
             </div>
         </div>
     </footer>
 
-    <div id="lightbox" class="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center cursor-zoom-out" onclick="closeLightbox()">
-        <button class="absolute top-8 right-8 text-white/50 hover:text-white transition-colors">
+    <!-- Lightbox DOM -->
+    <div id="lightbox" class="fixed inset-0 z-[100] bg-white/95 flex items-center justify-center cursor-zoom-out" onclick="closeLightbox()">
+        <button class="absolute top-8 right-8 text-lux-text hover:text-lux-accent transition-colors">
             <i data-lucide="x" class="w-10 h-10"></i>
         </button>
-        <img id="lightbox-img" src="" alt="Gallery Image" class="max-w-[95vw] max-h-[95vh] object-contain cursor-default shadow-2xl" onclick="event.stopPropagation()">
+        <img id="lightbox-img" src="" alt="Gallery Image" class="max-w-[95vw] max-h-[95vh] object-contain cursor-default shadow-2xl rounded-lg" onclick="event.stopPropagation()">
     </div>
 
+    <!-- Scripts -->
     <script>
         // 1. Initialize Icons
         lucide.createIcons();
