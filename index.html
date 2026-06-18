@@ -117,6 +117,7 @@
 </head>
 <body class="font-sans antialiased overflow-x-hidden selection:bg-lux-accent selection:text-white">
 
+    <!-- Navigation -->
     <nav class="fixed w-full z-50 transition-all duration-500" id="navbar">
         <div class="max-w-[90rem] mx-auto px-6 py-4 transition-all duration-500" id="nav-container">
             <div class="glass-panel rounded-full flex justify-between items-center px-8 py-3 shadow-glass">
@@ -140,6 +141,7 @@
             </div>
         </div>
         
+        <!-- Mobile Menu -->
         <div id="mobile-menu" class="absolute top-full left-0 w-full glass-panel hidden flex-col items-center py-8 space-y-6 shadow-xl border-t border-gray-100">
             <a href="#about" class="text-sm font-medium tracking-ultra text-lux-text mobile-link">ΣΧΕΤΙΚΑ</a>
             <a href="#services" class="text-sm font-medium tracking-ultra text-lux-text mobile-link">ΥΠΗΡΕΣΙΕΣ</a>
@@ -149,24 +151,30 @@
         </div>
     </nav>
 
+    <!-- Hero Section -->
     <section class="relative min-h-screen flex items-center pt-28 pb-12 overflow-hidden bg-lux-base">
+        <!-- Background Image -->
         <div class="absolute inset-0 z-0 bg-lux-base">
             <div class="w-full h-full bg-cover bg-center bg-fixed animate-kenburns opacity-[0.65]" style="background-image: url('https://raw.githubusercontent.com/agelmet/PAPADOPOULOS/refs/heads/main/n17.jpg');"></div>
         </div>
         
+        <!-- Adjusted Gradients -->
         <div class="absolute inset-0 bg-gradient-to-r from-white via-white/80 to-transparent z-10 hidden lg:block"></div>
         <div class="absolute inset-0 bg-gradient-to-b from-white via-white/85 to-white/40 z-10 lg:hidden"></div>
 
         <div class="max-w-[90rem] mx-auto w-full px-6 grid lg:grid-cols-2 gap-12 items-center relative z-20">
             
+            <!-- Left Side: Portrait Image (Desktop Only) -->
             <div class="hidden lg:flex justify-center items-center reveal relative">
                 <div class="relative w-[400px] h-[550px] rounded-3xl overflow-hidden glass-panel p-2 shadow-soft animate-float border border-white">
                     <div class="absolute inset-0 bg-gradient-to-tr from-white/20 to-transparent z-10 rounded-3xl pointer-events-none"></div>
                     <img src="https://raw.githubusercontent.com/agelmet/PAPADOPOULOS/refs/heads/main/2%20(2).jpg" alt="Ευάγγελος Παπαδόπουλος" class="w-full h-full object-cover rounded-[1.25rem]">
                 </div>
+                <!-- Decorative Shadow glow -->
                 <div class="absolute -z-10 w-[400px] h-[400px] bg-white/50 rounded-full blur-[80px] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
             </div>
 
+            <!-- Right Side: Content -->
             <div class="flex flex-col items-center lg:items-start text-center lg:text-left reveal reveal-delay-1 lg:pl-10 w-full">
                 <div class="inline-flex items-center gap-3 px-5 py-2 rounded-full bg-white shadow-sm border border-gray-100 text-lux-accent text-[11px] md:text-xs font-bold tracking-ultra mb-8">
                     <span class="w-1.5 h-1.5 rounded-full bg-lux-accent animate-pulse"></span>
@@ -177,12 +185,13 @@
                     Δίνοντας χώρο στο σώμα <br class="hidden sm:block"> <span class="italic text-lux-accent">να ακουστεί.</span>
                 </h1>
                 
+                <!-- Portrait Image Mobile Only -->
                 <div class="lg:hidden w-full max-w-[280px] aspect-[3/4] mx-auto rounded-3xl overflow-hidden bg-white p-2 shadow-soft mb-8 relative reveal border border-gray-100">
                     <img src="https://raw.githubusercontent.com/agelmet/PAPADOPOULOS/refs/heads/main/2%20(2).jpg" alt="Ευάγγελος Παπαδόπουλος" class="w-full h-full object-cover rounded-[1.25rem]">
                 </div>
 
                 <p class="text-lg md:text-xl text-lux-text/80 mb-10 max-w-lg font-light leading-relaxed">
-                    Ένας ασφαλής και υποστηρικτικός χώρος στη Νέα Σμύρνη. Προσεγγίζουμε τον άνθρωπο ολιστικά ως ένα ενιαίο σύνολο, με σεβασμό στη μοναδικότητά του.
+                    Ένας ασφαλής και υποστηρικτικός χώρος στη Νέα Σμύρνη. Προσεγγίζουμε τον άνθρωπο ολιστικά, με βαθύ σεβασμό στη μοναδικότητά του.
                 </p>
                 
                 <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 w-full">
@@ -199,6 +208,7 @@
         </div>
     </section>
 
+    <!-- About Section (Pale Green Theme) -->
     <section id="about" class="py-32 px-6 relative bg-paleGreen overflow-hidden border-y border-white/50">
         <div class="max-w-[85rem] mx-auto grid lg:grid-cols-12 gap-16 lg:gap-24 items-center">
             
@@ -211,7 +221,7 @@
                         Η κύρια εξειδίκευσή του είναι η Σωματική (Ραϊχική) Ψυχοθεραπεία. Είναι απόφοιτος του Κέντρου Ψυχοθεραπείας και Συμβουλευτικής "Βίλχελμ Ράιχ" (Ελληνικό Ινστιτούτο Νευροφυτοθεραπείας και Ανάλυσης του Χαρακτήρα), ενώ κατέχει μεταπτυχιακό δίπλωμα ειδίκευσης με θέμα «Στάση του σώματος και Χαρακτήρας».
                     </p>
                     <p>
-                        Η κλινική του προσέγγιση είναι συνθετικού τύπου, καθώς συνδυάζει διαρκώς νέα εργαλεία. Έχει εκπαιδευτεί στη Θεραπεία Τραύματος (σωματικό-σχεσιακό μοντέλο) από το Gestalt Synthesis, δίπλα στην εξειδικευμένη τραυματοθεραπεύτρια Morit Heitzler.
+                        Η κλινική του προσέγγιση είναι συνθετικού τύπου. Έχει εκπαιδευτεί στη Θεραπεία Τραύματος (σωματικό-σχεσιακό μοντέλο) από το Gestalt Synthesis, δίπλα στην εξειδικευμένη τραυματοθεραπεύτρια Morit Heitzler.
                     </p>
                     <p>
                         Παράλληλα, συνεχίζει την εποπτεία και την εκπαίδευσή του αντλώντας στοιχεία από προσεγγίσεις όπως η Gestalt, το Ψυχόδραμα, η Προσωποκεντρική και η Γνωσιακή Συμπεριφορική Ψυχοθεραπεία (CBT). Διαθέτει έντονο το αίσθημα της κοινωνικής προσφοράς, αφού έχει συντονίσει εθελοντικά ομάδες ενδυνάμωσης ανέργων στο "Επίκεντρο" της Action Aid και έχει εργαστεί ως εθελοντής στον οργανισμό «Το Χαμόγελο του Παιδιού». Είναι τακτικό μέλος της Ελληνικής Εταιρείας Συμβουλευτικής.
@@ -231,7 +241,9 @@
         </div>
     </section>
 
+    <!-- Services Section (Pale Yellow Theme) -->
     <section id="services" class="py-32 px-6 bg-paleYellow relative overflow-hidden">
+        <!-- Decorative abstract blobs -->
         <div class="absolute top-20 right-0 w-[40vw] h-[40vw] bg-white/60 rounded-full mix-blend-multiply blur-[80px] animate-blob"></div>
         <div class="absolute bottom-0 left-0 w-[50vw] h-[50vw] bg-lux-accent/5 rounded-full mix-blend-multiply blur-[100px] animate-blob" style="animation-delay: 2s;"></div>
 
@@ -244,6 +256,7 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
                 
+                <!-- Service 1 -->
                 <div class="relative group reveal h-full">
                     <div class="absolute -inset-1 bg-gradient-to-r from-lux-accent/10 to-white/40 rounded-[2.5rem] blur-xl opacity-0 group-hover:opacity-100 transition duration-700"></div>
                     <div class="relative h-full bg-white/80 backdrop-blur-xl border border-white p-10 lg:p-14 rounded-3xl shadow-soft group-hover:shadow-modern transition-all duration-500 transform group-hover:-translate-y-2 flex flex-col">
@@ -253,9 +266,9 @@
                                 <i data-lucide="activity" class="w-8 h-8 text-lux-accent"></i>
                             </div>
                         </div>
-                        <h3 class="text-2xl font-serif text-lux-text mb-4">Ατομική Σωματική Ψυχοθεραπεία & Διαχείριση Τραύματος</h3>
+                        <h3 class="text-2xl font-serif text-lux-text mb-4">Σωματική Ψυχοθεραπεία & Διαχείριση Τραύματος</h3>
                         <p class="text-lux-muted font-light leading-relaxed mb-8 flex-grow">
-                            Η σωματικά προσανατολισμένη συμβουλευτική δεν περιορίζεται μόνο στη λεκτική επικοινωνία. Αξιοποιώντας το σώμα και την εσωτερική του σοφία, εξερευνούμε τα ενεργειακά μπλοκαρίσματα και ανακαλύπτουμε τα ίχνη του τραύματος, που παραμένουν στο σωματικό επίπεδο του ατόμου.
+                            Η σωματικά προσανατολισμένη ατομική συμβουλευτική δεν περιορίζεται μόνο στη λεκτική επικοινωνία. Αξιοποιώντας το σώμα και την εσωτερική του σοφία, εξερευνούμε σε βάθος τα ενεργειακά μπλοκαρίσματα και ανακαλύπτουμε τα ίχνη του τραύματος, που παραμένουν στο σωματικό επίπεδο του ατόμου.
                         </p>
                         <div class="flex flex-wrap gap-2 mt-auto">
                             <span class="px-4 py-1.5 bg-paleYellow/50 text-lux-accent text-[10px] font-bold tracking-ultra rounded-full border border-gray-100">ΕΝΗΛΙΚΕΣ</span>
@@ -264,6 +277,7 @@
                     </div>
                 </div>
 
+                <!-- Service 2 -->
                 <div class="relative group reveal reveal-delay-1 h-full">
                     <div class="absolute -inset-1 bg-gradient-to-r from-white/40 to-lux-accent/10 rounded-[2.5rem] blur-xl opacity-0 group-hover:opacity-100 transition duration-700"></div>
                     <div class="relative h-full bg-white/80 backdrop-blur-xl border border-white p-10 lg:p-14 rounded-3xl shadow-soft group-hover:shadow-modern transition-all duration-500 transform group-hover:-translate-y-2 flex flex-col">
@@ -284,6 +298,7 @@
                     </div>
                 </div>
 
+                <!-- Service 3 -->
                 <div class="relative group reveal h-full">
                     <div class="absolute -inset-1 bg-gradient-to-r from-lux-accent/10 to-white/40 rounded-[2.5rem] blur-xl opacity-0 group-hover:opacity-100 transition duration-700"></div>
                     <div class="relative h-full bg-white/80 backdrop-blur-xl border border-white p-10 lg:p-14 rounded-3xl shadow-soft group-hover:shadow-modern transition-all duration-500 transform group-hover:-translate-y-2 flex flex-col">
@@ -304,6 +319,7 @@
                     </div>
                 </div>
 
+                <!-- Service 4 (NEW) -->
                 <div class="relative group reveal reveal-delay-1 h-full">
                     <div class="absolute -inset-1 bg-gradient-to-r from-white/40 to-lux-accent/10 rounded-[2.5rem] blur-xl opacity-0 group-hover:opacity-100 transition duration-700"></div>
                     <div class="relative h-full bg-white/80 backdrop-blur-xl border border-white p-10 lg:p-14 rounded-3xl shadow-soft group-hover:shadow-modern transition-all duration-500 transform group-hover:-translate-y-2 flex flex-col">
@@ -328,6 +344,7 @@
         </div>
     </section>
 
+    <!-- Philosophy / Body Armor Section (Dark Contrast Theme) -->
     <section id="philosophy" class="py-32 px-6 bg-lux-dark text-white relative border-y border-white/5">
         <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-lux-accent/5 rounded-full blur-[100px] pointer-events-none"></div>
         <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-white/5 rounded-full blur-[100px] pointer-events-none"></div>
@@ -361,6 +378,7 @@
         </div>
     </section>
 
+    <!-- Roadmap Section -->
     <section class="py-32 px-6 bg-lux-base relative overflow-hidden">
         <div class="max-w-[70rem] mx-auto">
             <div class="text-center mb-24 reveal">
@@ -371,16 +389,18 @@
                 <div class="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-lux-accent/30 to-transparent transform -translate-x-1/2"></div>
 
                 <div class="space-y-16">
+                    <!-- Step 1 -->
                     <div class="flex flex-col md:flex-row items-center justify-between w-full reveal group">
                         <div class="md:w-[45%] md:text-right pr-0 md:pr-12 mb-6 md:mb-0 text-center md:text-right bg-white p-6 rounded-2xl shadow-sm border border-gray-50 md:bg-transparent md:p-0 md:border-none md:shadow-none">
                             <span class="text-lux-accent font-bold tracking-ultra text-[10px] mb-2 block">ΒΗΜΑ 01</span>
-                            <h4 class="text-2xl font-serif text-lux-text mb-3">Πρώτη Επικοινωνία</h4>
+                            <h4 class="text-2xl font-serif text-lux-text mb-3">Επικοινωνία</h4>
                             <p class="text-lux-muted font-light text-sm md:text-base">Η πρώτη μας επαφή, ώστε να σας ακούσω και να κλείσουμε το πρώτο μας ραντεβού είτε στον χώρο του γραφείου είτε διαδικτυακά.</p>
                         </div>
                         <div class="relative z-10 flex items-center justify-center w-6 h-6 rounded-full bg-white border-4 border-lux-accent shadow-[0_0_15px_rgba(100,116,139,0.2)] group-hover:scale-125 transition-transform duration-500"></div>
                         <div class="md:w-[45%] hidden md:block"></div>
                     </div>
 
+                    <!-- Step 2 -->
                     <div class="flex flex-col md:flex-row-reverse items-center justify-between w-full reveal group">
                         <div class="md:w-[45%] md:text-left pl-0 md:pl-12 mb-6 md:mb-0 text-center md:text-left bg-white p-6 rounded-2xl shadow-sm border border-gray-50 md:bg-transparent md:p-0 md:border-none md:shadow-none">
                             <span class="text-lux-accent font-bold tracking-ultra text-[10px] mb-2 block">ΒΗΜΑ 02</span>
@@ -391,6 +411,7 @@
                         <div class="md:w-[45%] hidden md:block"></div>
                     </div>
 
+                    <!-- Step 3 -->
                     <div class="flex flex-col md:flex-row items-center justify-between w-full reveal group">
                         <div class="md:w-[45%] md:text-right pr-0 md:pr-12 mb-6 md:mb-0 text-center md:text-right bg-white p-6 rounded-2xl shadow-sm border border-gray-50 md:bg-transparent md:p-0 md:border-none md:shadow-none">
                             <span class="text-lux-accent font-bold tracking-ultra text-[10px] mb-2 block">ΒΗΜΑ 03</span>
@@ -401,10 +422,11 @@
                         <div class="md:w-[45%] hidden md:block"></div>
                     </div>
 
+                    <!-- Step 4 -->
                     <div class="flex flex-col md:flex-row-reverse items-center justify-between w-full reveal group">
                         <div class="md:w-[45%] md:text-left pl-0 md:pl-12 text-center md:text-left bg-white p-6 rounded-2xl shadow-sm border border-gray-50 md:bg-transparent md:p-0 md:border-none md:shadow-none">
                             <span class="text-lux-accent font-bold tracking-ultra text-[10px] mb-2 block">ΒΗΜΑ 04</span>
-                            <h4 class="text-2xl font-serif text-lux-text mb-3">Απελευθέρωση & Εξέλιξη</h4>
+                            <h4 class="text-2xl font-serif text-lux-text mb-3">Εξέλιξη</h4>
                             <p class="text-lux-muted font-light text-sm md:text-base">Βήμα-βήμα, σας συνοδεύω στην εξελικτική σας πορεία προς την αυτογνωσία και την ψυχική ενδυνάμωση.</p>
                         </div>
                         <div class="relative z-10 flex items-center justify-center w-6 h-6 rounded-full bg-white border-4 border-lux-accent shadow-[0_0_15px_rgba(100,116,139,0.2)] group-hover:scale-125 transition-transform duration-500"></div>
@@ -415,6 +437,7 @@
         </div>
     </section>
 
+    <!-- The Space (Gallery) Section (Pale Green Theme) -->
     <section id="space" class="py-32 px-6 bg-paleGreen border-t border-white/50">
         <div class="max-w-[90rem] mx-auto">
             <div class="text-center mb-16 reveal">
@@ -475,6 +498,7 @@
         </div>
     </section>
 
+    <!-- FAQ Section -->
     <section class="py-32 px-6 bg-lux-base border-t border-gray-100">
         <div class="max-w-[50rem] mx-auto">
             <div class="text-center mb-16 reveal">
@@ -484,6 +508,7 @@
 
             <div class="space-y-4">
                 
+                <!-- FAQ Item 1 (Wrapped in .reveal) -->
                 <div class="reveal transition-all duration-300">
                     <div class="faq-item bg-white border border-gray-200 rounded-2xl shadow-sm hover:shadow-md overflow-hidden">
                         <button class="w-full px-6 py-5 flex justify-between items-center text-left focus:outline-none group" onclick="toggleFaq(this)">
@@ -500,6 +525,7 @@
                     </div>
                 </div>
 
+                <!-- FAQ Item 2 (Wrapped in .reveal) -->
                 <div class="reveal reveal-delay-1 transition-all duration-300">
                     <div class="faq-item bg-white border border-gray-200 rounded-2xl shadow-sm hover:shadow-md overflow-hidden">
                         <button class="w-full px-6 py-5 flex justify-between items-center text-left focus:outline-none group" onclick="toggleFaq(this)">
@@ -516,6 +542,7 @@
                     </div>
                 </div>
 
+                <!-- FAQ Item 3 (Wrapped in .reveal) -->
                 <div class="reveal reveal-delay-2 transition-all duration-300">
                     <div class="faq-item bg-white border border-gray-200 rounded-2xl shadow-sm hover:shadow-md overflow-hidden">
                         <button class="w-full px-6 py-5 flex justify-between items-center text-left focus:outline-none group" onclick="toggleFaq(this)">
@@ -536,6 +563,7 @@
         </div>
     </section>
 
+    <!-- Footer / Contact (Deep Dark Serious Theme) -->
     <footer id="contact" class="bg-lux-darker border-t border-white/5 pt-32 pb-12 relative overflow-hidden">
         <div class="absolute inset-0 bg-gradient-to-t from-[#020617] to-[#0f172a] z-0"></div>
         
@@ -598,6 +626,7 @@
         </div>
     </footer>
 
+    <!-- Lightbox DOM -->
     <div id="lightbox" class="fixed inset-0 z-[100] bg-white/95 flex items-center justify-center cursor-zoom-out" onclick="closeLightbox()">
         <button class="absolute top-8 right-8 text-lux-text hover:text-lux-accent transition-colors">
             <i data-lucide="x" class="w-10 h-10"></i>
@@ -605,6 +634,7 @@
         <img id="lightbox-img" src="" alt="Gallery Image" class="max-w-[95vw] max-h-[95vh] object-contain cursor-default shadow-2xl rounded-lg" onclick="event.stopPropagation()">
     </div>
 
+    <!-- Scripts -->
     <script>
         // 1. Initialize Icons
         lucide.createIcons();
